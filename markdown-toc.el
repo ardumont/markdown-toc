@@ -6,10 +6,32 @@
 ;; URL: http://github.com/ardumont/markdown-toc
 ;; Created: 24th May 2014
 ;; Version: 0.0.1
-;; Keywords: lisp, tools, markdown, toc
+;; Keywords: markdown, toc, tools,
 ;; Package-Requires: ((markdown-mode "2.0") (dash "2.5.0") (s "1.7.0"))
 
 ;;; Commentary:
+
+;; Inside a markdown - M-x markdown-toc/generate-toc
+;; This will compute the TOC at insert it at current position.
+
+;; Here is a possible output:
+;; - [some markdown page title](#some-markdown-page-title)
+;; - [main title](#main-title)
+;;     - [Sources](#sources)
+;;         - [Marmalade (recommended)](#marmalade-recommended)
+;;         - [Melpa-stable](#melpa-stable)
+;;         - [Melpa (~snapshot)](#melpa-~snapshot)
+;;     - [Install](#install)
+;;         - [Load org-trello](#load-org-trello)
+;;     - [Alternative](#alternative)
+;;         - [Git](#git)
+;;         - [Tar](#tar)
+;; - [another title](#another-title)
+;;     - [with](#with)
+;;     - [some](#some)
+;; - [heading](#heading)
+
+;; Install - M-x package-install RET markdown-toc RET
 
 ;;; Code:
 
