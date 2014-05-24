@@ -39,10 +39,6 @@
 (require 'dash)
 (require 'markdown-mode)
 
-;; dev
-;; (trace-function 'markdown-imenu-create-index)
-;; (untrace-function 'markdown-imenu-create-index)
-
 (defun markdown-toc/--compute-toc-structure-from-level (level menu-index)
   "Given a LEVEL and a MENU-INDEX, compute the toc structure."
   (when menu-index
