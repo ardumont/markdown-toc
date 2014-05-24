@@ -1,7 +1,7 @@
 #+title: dev backlog
 #+author: ardumont
 
-* IN-PROGRESS 0.0.1 [83%]
+* IN-PROGRESS 0.0.1 [91%]
 - [X] Initialize Project
 - [X] Initialize github repository
 - [X] Cask
@@ -12,8 +12,9 @@
 - [X] Tests
 - [X] Travis-ci
 - [X] Package
-- [ ] Deploy to melpa
-- [ ] Deploy to marmalade (it it's up)
+- [X] Release notes
 
 * TODO 0.0.2
 - [ ] Update an existing TOC
+- [ ] Deploy to Marmalade (if it's up - marmalade is currently migrating)
+- [ ] Deploy to Melpa
