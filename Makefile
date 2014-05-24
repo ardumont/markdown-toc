@@ -7,7 +7,7 @@ EMACS=emacs
 .PHONY: clean
 
 pr:
-	hub pull-request -b markdown-toc:master
+	hub pull-request -b ardumont:master
 
 build:
 	cask build
