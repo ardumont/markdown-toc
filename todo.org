@@ -17,7 +17,9 @@ CLOSED: [2014-05-24 Sat 22:58]
 
 * IN-PROGRESS 0.0.2 [50%]
 - [X] Prepare filesystem to deploy to melpa (avoid having tests files with the file to package)
-- [ ] Deploy to Melpa
+- [X] Upgrade version + package
+- [ ] Release notes
+- [ ] Deploy to Melpa -> make recipe + PR to them
 
 * TODO 0.0.3
 - [ ] Update an existing TOC
