@@ -9,7 +9,7 @@
 (message "Launching tests!")
 
 ;; load code prod
-(load-file "markdown-toc.el")
+(load-file "./markdown-toc.el")
 
 ;; Add test folder to the load path
 (add-to-list 'load-path (expand-file-name "./test"))
@@ -24,7 +24,7 @@
 (defun markdown-toc/test-load-namespaces! ()
   "Load the org-trello namespaces."
   (interactive)
-  (mapc #'load-file '("test/markdown-toc-tests.el")))
+  (mapc #'load-file '("./test/markdown-toc-tests.el")))
 
 (markdown-toc/test-load-namespaces!)
 

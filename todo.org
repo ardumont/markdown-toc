@@ -1,7 +1,8 @@
 #+title: dev backlog
 #+author: ardumont
 
-* IN-PROGRESS 0.0.1 [100%]
+* DONE 0.0.1 [100%]
+CLOSED: [2014-05-24 Sat 22:58]
 - [X] Initialize Project
 - [X] Initialize github repository
 - [X] Cask
@@ -14,7 +15,10 @@
 - [X] Upgrade version + package
 - [X] Release notes
 
-* TODO 0.0.2
+* IN-PROGRESS 0.0.2 [50%]
+- [X] Prepare filesystem to deploy to melpa (avoid having tests files with the file to package)
+- [ ] Deploy to Melpa
+
+* TODO 0.0.3
 - [ ] Update an existing TOC
 - [ ] Deploy to Marmalade (if it's up - marmalade is currently migrating)
-- [ ] Deploy to Melpa
