@@ -1,7 +1,8 @@
 #+title: dev backlog
 #+author: ardumont
 
-* IN-PROGRESS 0.0.1 [100%]
+* DONE 0.0.1 [100%]
+CLOSED: [2014-05-24 Sat 22:58]
 - [X] Initialize Project
 - [X] Initialize github repository
 - [X] Cask
@@ -14,7 +15,13 @@
 - [X] Upgrade version + package
 - [X] Release notes
 
-* TODO 0.0.2
+* DONE 0.0.2 [100%]
+CLOSED: [2014-05-24 Sat 23:09]
+- [X] Prepare filesystem to deploy to melpa (avoid having tests files with the file to package)
+- [X] Upgrade version + package
+- [X] Release notes
+- [X] Deploy to Melpa -> make recipe + PR to them - https://github.com/ardumont/melpa/blob/add-markdown-toc/recipes/markdown-toc
+
+* TODO 0.0.3
 - [ ] Update an existing TOC
 - [ ] Deploy to Marmalade (if it's up - marmalade is currently migrating)
-- [ ] Deploy to Melpa
