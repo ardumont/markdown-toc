@@ -1,4 +1,4 @@
-mardown-toc
+mardown-toc [![Build Status](https://travis-ci.org/ardumont/markdown-toc.png?branch=master)](https://travis-ci.org/ardumont/markdown-toc)
 ===========
 
 A simple mode to create TOC in a markdown file.
