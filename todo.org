@@ -1,16 +1,18 @@
 #+title: dev backlog
 #+author: ardumont
 
-* IN-PROGRESS 0.0.1 [66%]
+* IN-PROGRESS 0.0.1 [72%]
 - [X] Initialize Project
 - [X] Initialize github repository
 - [X] Cask
 - [X] Generate a TOC at point
 - [X] Update header documentation
 - [X] Update README.md about use case
-- [ ] Makefile
-- [ ] Tests
+- [X] Makefile
+- [X] Tests
 - [ ] Travis-ci
+- [ ] Deploy to melpa
+- [ ] Deploy to marmalade (it it's up)
 
 * TODO 0.0.2
 - [ ] Update an existing TOC
