@@ -15,7 +15,8 @@ CLOSED: [2014-05-24 Sat 22:58]
 - [X] Upgrade version + package
 - [X] Release notes
 
-* IN-PROGRESS 0.0.2 [100%]
+* DONE 0.0.2 [100%]
+CLOSED: [2014-05-24 Sat 23:09]
 - [X] Prepare filesystem to deploy to melpa (avoid having tests files with the file to package)
 - [X] Upgrade version + package
 - [X] Release notes
