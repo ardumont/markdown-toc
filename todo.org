@@ -15,10 +15,10 @@ CLOSED: [2014-05-24 Sat 22:58]
 - [X] Upgrade version + package
 - [X] Release notes
 
-* IN-PROGRESS 0.0.2 [50%]
+* IN-PROGRESS 0.0.2 [75%]
 - [X] Prepare filesystem to deploy to melpa (avoid having tests files with the file to package)
 - [X] Upgrade version + package
-- [ ] Release notes
+- [X] Release notes
 - [ ] Deploy to Melpa -> make recipe + PR to them
 
 * TODO 0.0.3
