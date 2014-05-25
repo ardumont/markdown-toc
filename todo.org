@@ -1,10 +1,12 @@
  #+title: dev backlog
 #+author: ardumont
 
+* TODO 0.0.6 [%]
+- [ ] Deploy to Marmalade (if it's up - marmalade is currently migrating)
+
 * IN-PROGRESS 0.0.5 [40%]
 - [X] Add backlog
 - [X] Update README.md about the installation process using direct .el file
-- [ ] Deploy to Marmalade (if it's up - marmalade is currently migrating)
 - [ ] Upgrade version
 - [ ] Release notes
 
