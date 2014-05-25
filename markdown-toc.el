@@ -73,10 +73,14 @@
 (defun markdown-toc/generate-toc ()
   "Called from within a markdown file, this will generate a TOC at current position."
   (interactive)
-  (-> (markdown-imenu-create-index)
-    markdown-toc/--compute-toc-structure
-    markdown-toc/--to-markdown-toc
-    insert))
+  (--> (markdown-imenu-create-index)
+    (markdown-toc/--compute-toc-structure it)
+    (markdown-toc/--to-markdown-toc it)
+    (format "%s\n%s\n%s\n"
+            "<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->\n**table of Contents**\n"
+            it
+            "<!-- markdown-toc end -->")
+    (insert it)))
 
 (provide 'markdown-toc)
 ;;; markdown-toc.el ends here

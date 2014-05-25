@@ -22,6 +22,11 @@ CLOSED: [2014-05-24 Sat 23:09]
 - [X] Release notes
 - [X] Deploy to Melpa -> make recipe + PR to them - https://github.com/ardumont/melpa/blob/add-markdown-toc/recipes/markdown-toc
 
-* TODO 0.0.3
-- [ ] Update an existing TOC
+* IN-PROGRESS 0.0.3 [0%]
+- [-] Update an existing TOC
+  - [X] Create a section around TOC
+  - [ ] Find if a TOC is already present in buffer
+  - [ ] Remove old TOC
+  - [ ] Create new one
+- [ ] If melpa recipe is accepted, update the README.md about how to install
 - [ ] Deploy to Marmalade (if it's up - marmalade is currently migrating)
