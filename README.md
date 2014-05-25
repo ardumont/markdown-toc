@@ -1,5 +1,6 @@
-mardown-toc [![Build Status](https://travis-ci.org/ardumont/markdown-toc.png?branch=master)](https://travis-ci.org/ardumont/markdown-toc)
-===========
+markdown-toc [![Build Status](https://travis-ci.org/ardumont/markdown-toc.png?branch=master)](https://travis-ci.org/ardumont/markdown-toc)
+============
+
 <!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
 **Table of Contents**
 
