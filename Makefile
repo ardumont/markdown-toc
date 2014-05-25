@@ -41,8 +41,5 @@ package: clean pkg-el
 info:
 	cask info
 
-release:
-	./release.sh $(VERSION) $(USER)
-
 install-cask:
 	curl -fsSkL https://raw.github.com/cask/cask/master/go | python
