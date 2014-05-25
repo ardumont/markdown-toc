@@ -22,7 +22,8 @@ CLOSED: [2014-05-24 Sat 23:09]
 - [X] Release notes
 - [X] Deploy to Melpa -> make recipe + PR to them - https://github.com/ardumont/melpa/blob/add-markdown-toc/recipes/markdown-toc
 
-* IN-PROGRESS 0.0.3 [100%]
+* DONE 0.0.3 [100%]
+CLOSED: [2014-05-25 Sun 09:36]
 - [X] Update an existing TOC
   - [X] Create a section around TOC
   - [X] Find if a TOC is already present in buffer
