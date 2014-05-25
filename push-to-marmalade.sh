@@ -30,7 +30,7 @@ EOF
 fi
 
 TOKEN=$(cat $TOKEN_FILE)
-ARCHIVE=org-trello-$VERSION.tar
+ARCHIVE=markdown-toc-$VERSION.tar
 
 if [ ! -f $ARCHIVE ]; then
 cat <<EOF
