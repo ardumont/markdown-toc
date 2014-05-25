@@ -11,7 +11,7 @@ markdown-toc [![Build Status](https://travis-ci.org/ardumont/markdown-toc.png?br
             - [melpa stable](#melpa-stable)
             - [melpa](#melpa)
         - [Install](#install)
-    - [Tarball](#tarball)
+    - [emacs-lisp file](#emacs-lisp-file)
 - [Inspiration](#inspiration)
 
 <!-- markdown-toc end -->
@@ -93,11 +93,11 @@ Then somewhere in your *~/.emacs.d/init.el* or *~/.emacs*, require markdown-toc.
 (require 'markdown-toc)
 ```
 
-## Tarball
+## emacs-lisp file
 
-Retrieve the tarball https://github.com/ardumont/markdown-toc/releases.
+Retrieve the markdown-toc.el https://github.com/ardumont/markdown-toc/releases.
 
-Then hit <kbd>M-x package-install-file RET markdown-toc.tar RET</kbd>
+Then hit <kbd>M-x package-install-file RET markdown-toc.el RET</kbd>
 
 # Inspiration
 

@@ -1,9 +1,9 @@
  #+title: dev backlog
 #+author: ardumont
 
-* IN-PROGRESS 0.0.5 [20%]
+* IN-PROGRESS 0.0.5 [40%]
 - [X] Add backlog
-- [ ] Update readme about the installation process using direct .el file
+- [X] Update README.md about the installation process using direct .el file
 - [ ] Deploy to Marmalade (if it's up - marmalade is currently migrating)
 - [ ] Upgrade version
 - [ ] Release notes
