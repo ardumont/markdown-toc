@@ -16,6 +16,9 @@
 ;; Afterwards, if a TOC is already present, it will update the one present in buffer.
 
 ;; Here is a possible output:
+;; <!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
+;; **table of Contents**
+
 ;; - [some markdown page title](#some-markdown-page-title)
 ;; - [main title](#main-title)
 ;;     - [Sources](#sources)
@@ -31,6 +34,7 @@
 ;;     - [with](#with)
 ;;     - [some](#some)
 ;; - [heading](#heading)
+;; <!-- markdown-toc end -->
 
 ;; Install - M-x package-install RET markdown-toc RET
 
