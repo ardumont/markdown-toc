@@ -21,11 +21,12 @@ A simple mode to create TOC in a markdown file.
 # Use
 
 Inside a markdown file, the first time, place yourself where you want to insert the TOC:
+
 <kbd>M-x markdown-toc/generate-toc</kbd>
 
 This will compute the TOC and insert it at current position.
 
-Here is a possible output:
+Here is one possible output:
 
 ```markdown
 <!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
@@ -50,7 +51,9 @@ Here is a possible output:
 <!-- markdown-toc end -->
 ```
 
-To update the TOC, simply reexecute: <kbd>M-x markdown-toc/generate-toc</kbd>
+To update the TOC, simply execute again: <kbd>M-x markdown-toc/generate-toc</kbd>
+
+This will update the current TOC.
 
 # Install
 
