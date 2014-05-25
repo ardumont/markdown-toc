@@ -1,4 +1,4 @@
-#+title: dev backlog
+ #+title: dev backlog
 #+author: ardumont
 
 * DONE 0.0.1 [100%]
@@ -34,12 +34,12 @@ CLOSED: [2014-05-25 Sun 09:36]
 - [X] Upgrade version
 - [X] Release notes
 
-* IN-PROGRESS 0.0.4 [80%]
+* IN-PROGRESS 0.0.4 [100%]
 - [X] If melpa recipe is accepted, update the README.md about how to install
 - [X] Add COPYING file + licence inside markdown-toc.el
 - [X] Simplify packaging (no need to use tarball nor *-pkg.el file)
 - [X] Upgrade version
-- [ ] Release notes
+- [X] Release notes
 
 * TODO 0.0.5 [%]
 - [ ] Deploy to Marmalade (if it's up - marmalade is currently migrating)

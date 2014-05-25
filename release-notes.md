@@ -1,3 +1,11 @@
+# 0.0.4
+
+- [X] If melpa recipe is accepted, update the README.md about how to install
+- [X] Add COPYING file + licence inside markdown-toc.el
+- [X] Simplify packaging (no need to use tarball nor *-pkg.el file)
+- [X] Upgrade version
+- [X] Release notes
+
 # 0.0.3
 
 - [X] Update an existing TOC
