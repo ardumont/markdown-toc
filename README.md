@@ -3,10 +3,13 @@ mardown-toc [![Build Status](https://travis-ci.org/ardumont/markdown-toc.png?bra
 
 A simple mode to create TOC in a markdown file.
 
-- [mardown-toc](#mardown-toc)
+<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
+**table of Contents**
+
 - [Use](#use)
 - [Install](#install)
 - [TODO](#todo)
+<!-- markdown-toc end -->
 
 # Use
 
