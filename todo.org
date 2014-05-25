@@ -34,8 +34,9 @@ CLOSED: [2014-05-25 Sun 09:36]
 - [X] Upgrade version
 - [X] Release notes
 
-* IN-PROGRESS 0.0.4 [25%]
+* IN-PROGRESS 0.0.4 [40%]
 - [X] If melpa recipe is accepted, update the README.md about how to install
+- [X] Add COPYING file + licence inside markdown-toc.el
 - [ ] Simplify packaging (no need to use tarball)
 - [ ] Upgrade version
 - [ ] Release notes
