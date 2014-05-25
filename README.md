@@ -87,6 +87,12 @@ Then hit <kbd>M-x eval-buffer</kbd> to evaluate the buffer's contents.
 
 <kbd>M-x package-install RET markdown-toc RET</kbd>
 
+Then somewhere in your *~/.emacs.d/init.el* or *~/.emacs*, require markdown-toc.
+
+```lisp
+(require 'markdown-toc)
+```
+
 ## Tarball
 
 Retrieve the tarball https://github.com/ardumont/markdown-toc/releases.
