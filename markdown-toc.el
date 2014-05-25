@@ -5,9 +5,26 @@
 ;; Maintainer: Antoine R. Dumont
 ;; URL: http://github.com/ardumont/markdown-toc
 ;; Created: 24th May 2014
-;; Version: 0.0.3
+;; Version: 0.0.4
 ;; Keywords: markdown, toc, tools,
 ;; Package-Requires: ((markdown-mode "2.0") (dash "2.5.0") (s "1.7.0"))
+
+;; This file is NOT part of GNU Emacs.
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 3, or (at your option)
+;; any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs; see the file COPYING. If not, write to the
+;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+;; Boston, MA 02110-1301, USA.
 
 ;;; Commentary:
 
@@ -16,6 +33,9 @@
 ;; Afterwards, if a TOC is already present, it will update the one present in buffer.
 
 ;; Here is a possible output:
+;; <!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
+;; **Table of Contents**
+
 ;; - [some markdown page title](#some-markdown-page-title)
 ;; - [main title](#main-title)
 ;;     - [Sources](#sources)
@@ -31,6 +51,8 @@
 ;;     - [with](#with)
 ;;     - [some](#some)
 ;; - [heading](#heading)
+;;
+;; <!-- markdown-toc end -->
 
 ;; Install - M-x package-install RET markdown-toc RET
 
@@ -40,7 +62,7 @@
 (require 'dash)
 (require 'markdown-mode)
 
-(defconst *MARKDOWN-TOC/VERSION* "0.0.3" "Current version installed.")
+(defconst *MARKDOWN-TOC/VERSION* "0.0.4" "Current version installed.")
 
 (defun markdown-toc/version ()
   "Markdown-toc version."
@@ -79,7 +101,7 @@
     (s-join "\n")))
 
 (defconst *markdown-toc/header-toc-start* "<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->")
-(defconst *markdown-toc/header-toc-title* "**table of Contents**")
+(defconst *markdown-toc/header-toc-title* "**Table of Contents**")
 (defconst *markdown-toc/header-toc-end*   "<!-- markdown-toc end -->")
 
 (defun markdown-toc/--toc-already-present-p! ()
@@ -110,7 +132,7 @@ Return the end position if it exists, nil otherwise."
 
 (defun markdown-toc/--compute-full-toc (toc)
   "Given the TOC's content, compute the full toc with comments and title."
-  (format "%s\n%s\n\n%s\n%s\n"
+  (format "%s\n%s\n\n%s\n\n%s\n"
           *markdown-toc/header-toc-start*
           *markdown-toc/header-toc-title*
           toc

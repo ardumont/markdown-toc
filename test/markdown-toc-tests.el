@@ -89,38 +89,13 @@
 
 (expectations
   (expect
-      "<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->\n**table of Contents**\n\nsome-toc\n<!-- markdown-toc end -->\n"
+      "<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->\n**Table of Contents**\n\nsome-toc\n\n<!-- markdown-toc end -->\n"
     (markdown-toc/--compute-full-toc "some-toc")))
-
-(defmacro markdown-toc-tests/with-temp-buffer (text body-test &optional nb-lines-forward)
-  `(with-temp-buffer
-     (markdown-mode)
-     (require 'markdown-toc)
-     (insert ,text)
-     (goto-char (point-min))
-     ,body-test
-     (buffer-substring-no-properties (point-min) (point-max))))
-
-(markdown-toc-tests/with-temp-buffer
-"To install **org-trello** in your emacs, you need a few steps.
-## Sources
-If not already configured, you need to prepare emacs to work with marmalade or melpa.
-For this, you need to install a snippet of code in your emacs configuration file.
-### Marmalade (recommended)
-### Melpa-stable
-### Melpa (~snapshot)
-## Install
-### Load org-trello
-### Alternative
-#### Git
-#### Tar
-"
-'markdown-toc/generate-toc)
 
 ;; Create a new TOC
 (expectations
   (expect "<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
-**table of Contents**
+**Table of Contents**
 
 - [-](#-)
     - [Marmalade (recommended)](#marmalade-(recommended))
@@ -131,6 +106,7 @@ For this, you need to install a snippet of code in your emacs configuration file
         - [Alternative](#alternative)
             - [Git](#git)
             - [Tar](#tar)
+
 <!-- markdown-toc end -->
 To install **org-trello** in your emacs, you need a few steps.
 ## Sources
@@ -168,7 +144,7 @@ For this, you need to install a snippet of code in your emacs configuration file
 (expectations
   ;; Update an existing TOC
   (expect "<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
-**table of Contents**
+**Table of Contents**
 
 - [-](#-)
     - [Marmalade (recommended)](#marmalade-(recommended))
@@ -179,6 +155,7 @@ For this, you need to install a snippet of code in your emacs configuration file
         - [Alternative](#alternative)
             - [Git](#git)
             - [Tar](#tar)
+
 <!-- markdown-toc end -->
 To install **org-trello** in your emacs, you need a few steps.
 ## Sources
@@ -197,7 +174,7 @@ For this, you need to install a snippet of code in your emacs configuration file
       (markdown-mode)
       (require 'markdown-toc)
       (insert "<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
-**table of Contents**
+**Table of Contents**
 
 - [-](#-)
     - [Melpa (~snapshot)](#melpa-(~snapshot))
@@ -206,6 +183,7 @@ For this, you need to install a snippet of code in your emacs configuration file
         - [Alternative](#alternative)
             - [Git](#git)
             - [Tar](#tar)
+
 <!-- markdown-toc end -->
 To install **org-trello** in your emacs, you need a few steps.
 ## Sources
