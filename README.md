@@ -1,7 +1,7 @@
 mardown-toc [![Build Status](https://travis-ci.org/ardumont/markdown-toc.png?branch=master)](https://travis-ci.org/ardumont/markdown-toc)
 ===========
 <!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
-**table of Contents**
+**Table of Contents**
 
 - [Use](#use)
 - [Install](#install)
@@ -28,7 +28,7 @@ Here is a possible output:
 
 ```markdown
 <!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
-**table of Contents**
+**Table of Contents**
 
 - [some markdown page title](#some-markdown-page-title)
 - [main title](#main-title)

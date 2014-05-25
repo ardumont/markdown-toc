@@ -89,13 +89,13 @@
 
 (expectations
   (expect
-      "<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->\n**table of Contents**\n\nsome-toc\n\n<!-- markdown-toc end -->\n"
+      "<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->\n**Table of Contents**\n\nsome-toc\n\n<!-- markdown-toc end -->\n"
     (markdown-toc/--compute-full-toc "some-toc")))
 
 ;; Create a new TOC
 (expectations
   (expect "<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
-**table of Contents**
+**Table of Contents**
 
 - [-](#-)
     - [Marmalade (recommended)](#marmalade-(recommended))
@@ -144,7 +144,7 @@ For this, you need to install a snippet of code in your emacs configuration file
 (expectations
   ;; Update an existing TOC
   (expect "<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
-**table of Contents**
+**Table of Contents**
 
 - [-](#-)
     - [Marmalade (recommended)](#marmalade-(recommended))
@@ -174,7 +174,7 @@ For this, you need to install a snippet of code in your emacs configuration file
       (markdown-mode)
       (require 'markdown-toc)
       (insert "<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
-**table of Contents**
+**Table of Contents**
 
 - [-](#-)
     - [Melpa (~snapshot)](#melpa-(~snapshot))
