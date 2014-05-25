@@ -39,6 +39,9 @@ Here is a possible output:
 
 <kbd>M-x package-install RET markdown-toc RET</kbd>
 
-# TODO
+# Inspiration
 
-- Update current generated TOC in markdown file.
+https://github.com/thlorenz/doctoc
+
+The problem I had with doctoc is the installation process.
+I do not want to install the node tools just for this.
