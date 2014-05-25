@@ -40,6 +40,13 @@
 (require 'dash)
 (require 'markdown-mode)
 
+(defconst *MARKDOWN-TOC/VERSION* "0.0.2" "Current version installed.")
+
+(defun markdown-toc/version ()
+  "Markdown-toc version."
+  (interactive)
+  (message "markdown-toc version: %s" *MARKDOWN-TOC/VERSION*))
+
 (defun markdown-toc/--compute-toc-structure-from-level (level menu-index)
   "Given a LEVEL and a MENU-INDEX, compute the toc structure."
   (when menu-index
