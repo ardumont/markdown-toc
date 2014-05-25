@@ -5,7 +5,7 @@
 ;; Maintainer: Antoine R. Dumont
 ;; URL: http://github.com/ardumont/markdown-toc
 ;; Created: 24th May 2014
-;; Version: 0.0.3
+;; Version: 0.0.4
 ;; Keywords: markdown, toc, tools,
 ;; Package-Requires: ((markdown-mode "2.0") (dash "2.5.0") (s "1.7.0"))
 
@@ -61,7 +61,7 @@
 (require 'dash)
 (require 'markdown-mode)
 
-(defconst *MARKDOWN-TOC/VERSION* "0.0.3" "Current version installed.")
+(defconst *MARKDOWN-TOC/VERSION* "0.0.4" "Current version installed.")
 
 (defun markdown-toc/version ()
   "Markdown-toc version."
