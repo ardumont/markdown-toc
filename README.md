@@ -1,8 +1,5 @@
 mardown-toc [![Build Status](https://travis-ci.org/ardumont/markdown-toc.png?branch=master)](https://travis-ci.org/ardumont/markdown-toc)
 ===========
-
-A simple mode to create TOC in a markdown file.
-
 <!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
 **table of Contents**
 
@@ -15,7 +12,10 @@ A simple mode to create TOC in a markdown file.
         - [Install](#install)
     - [Tarball](#tarball)
 - [Inspiration](#inspiration)
+
 <!-- markdown-toc end -->
+
+A simple mode to create TOC in a markdown file.
 
 # Use
 
@@ -45,6 +45,7 @@ Here is a possible output:
 	- [with](#with)
 	- [some](#some)
 	- [heading](#heading)
+
 <!-- markdown-toc end -->
 ```
 

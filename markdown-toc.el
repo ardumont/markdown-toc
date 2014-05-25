@@ -51,6 +51,7 @@
 ;;     - [with](#with)
 ;;     - [some](#some)
 ;; - [heading](#heading)
+;;
 ;; <!-- markdown-toc end -->
 
 ;; Install - M-x package-install RET markdown-toc RET
@@ -131,7 +132,7 @@ Return the end position if it exists, nil otherwise."
 
 (defun markdown-toc/--compute-full-toc (toc)
   "Given the TOC's content, compute the full toc with comments and title."
-  (format "%s\n%s\n\n%s\n%s\n"
+  (format "%s\n%s\n\n%s\n\n%s\n"
           *markdown-toc/header-toc-start*
           *markdown-toc/header-toc-title*
           toc
