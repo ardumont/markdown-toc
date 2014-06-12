@@ -64,6 +64,7 @@
 
 (defconst *MARKDOWN-TOC/VERSION* "0.0.4" "Current version installed.")
 
+;;;###autoload
 (defun markdown-toc/version ()
   "Markdown-toc version."
   (interactive)
@@ -138,6 +139,7 @@ Return the end position if it exists, nil otherwise."
           toc
           *markdown-toc/header-toc-end*))
 
+;;;###autoload
 (defun markdown-toc/generate-toc ()
   "Generate a TOC for markdown file at current position.
 Afterward, if a TOC is already present in the buffer, it will update it."
