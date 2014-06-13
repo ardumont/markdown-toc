@@ -1,10 +1,10 @@
  #+title: dev backlog
 #+author: ardumont
 
-* IN-PROGRESS 0.0.6 [40%]
+* IN-PROGRESS 0.0.6 [60%]
 - [X] Deploy to Marmalade
 - [X] Use directly markdown-toc, no need to require anything
-- [ ] Update documentation about installation procedure
+- [X] Update documentation about installation procedure (marmalade)
 - [ ] Update version
 - [ ] Update release notes
 

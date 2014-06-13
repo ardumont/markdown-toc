@@ -10,6 +10,7 @@ markdown-toc [![Build Status](https://travis-ci.org/ardumont/markdown-toc.png?br
         - [Setup](#setup)
             - [melpa stable](#melpa-stable)
             - [melpa](#melpa)
+            - [marmalade](#marmalade)
         - [Install](#install)
     - [emacs-lisp file](#emacs-lisp-file)
 - [Inspiration](#inspiration)
@@ -83,9 +84,13 @@ Then hit <kbd>M-x eval-buffer</kbd> to evaluate the buffer's contents.
 
 Then hit <kbd>M-x eval-buffer</kbd> to evaluate the buffer's contents.
 
-### Install
+#### marmalade
 
-<kbd>M-x package-install RET markdown-toc RET</kbd>
+``` lisp
+(require 'package)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
+```
 
 ### Install
 
