@@ -1,3 +1,11 @@
+# 0.0.5
+
+- [X] Deploy to Marmalade
+- [X] Use directly markdown-toc, no need to require anything
+- [X] Update documentation about installation procedure (marmalade)
+- [X] Update version
+- [X] Update release notes
+
 # 0.0.4
 
 - [X] If melpa recipe is accepted, update the README.md about how to install

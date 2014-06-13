@@ -1,26 +1,21 @@
  #+title: dev backlog
 #+author: ardumont
 
-* DONE 0.0.1 [100%]
-CLOSED: [2014-05-24 Sat 22:58]
-- [X] Initialize Project
-- [X] Initialize github repository
-- [X] Cask
-- [X] Generate a TOC at point
-- [X] Update header documentation
-- [X] Update README.md about use case
-- [X] Makefile
-- [X] Tests
-- [X] Travis-ci
-- [X] Upgrade version + package
-- [X] Release notes
+* DONE 0.0.5 [100%]
+CLOSED: [2014-06-13 Fri 17:39]
+- [X] Deploy to Marmalade
+- [X] Use directly markdown-toc, no need to require anything
+- [X] Update documentation about installation procedure (marmalade)
+- [X] Update version
+- [X] Update release notes
 
-* DONE 0.0.2 [100%]
-CLOSED: [2014-05-24 Sat 23:09]
-- [X] Prepare filesystem to deploy to melpa (avoid having tests files with the file to package)
-- [X] Upgrade version + package
+* DONE 0.0.4 [100%]
+CLOSED: [2014-05-25 Sun 18:56]
+- [X] If melpa recipe is accepted, update the README.md about how to install
+- [X] Add COPYING file + licence inside markdown-toc.el
+- [X] Simplify packaging (no need to use tarball nor *-pkg.el file)
+- [X] Upgrade version
 - [X] Release notes
-- [X] Deploy to Melpa -> make recipe + PR to them - https://github.com/ardumont/melpa/blob/add-markdown-toc/recipes/markdown-toc
 
 * DONE 0.0.3 [100%]
 CLOSED: [2014-05-25 Sun 09:36]
@@ -34,13 +29,23 @@ CLOSED: [2014-05-25 Sun 09:36]
 - [X] Upgrade version
 - [X] Release notes
 
-* DONE 0.0.4 [100%]
-CLOSED: [2014-05-25 Sun 18:56]
-- [X] If melpa recipe is accepted, update the README.md about how to install
-- [X] Add COPYING file + licence inside markdown-toc.el
-- [X] Simplify packaging (no need to use tarball nor *-pkg.el file)
-- [X] Upgrade version
+* DONE 0.0.2 [100%]
+CLOSED: [2014-05-24 Sat 23:09]
+- [X] Prepare filesystem to deploy to melpa (avoid having tests files with the file to package)
+- [X] Upgrade version + package
 - [X] Release notes
+- [X] Deploy to Melpa -> make recipe + PR to them - https://github.com/ardumont/melpa/blob/add-markdown-toc/recipes/markdown-toc
 
-* TODO 0.0.5 [%]
-- [ ] Deploy to Marmalade (if it's up - marmalade is currently migrating)
+* DONE 0.0.1 [100%]
+CLOSED: [2014-05-24 Sat 22:58]
+- [X] Initialize Project
+- [X] Initialize github repository
+- [X] Cask
+- [X] Generate a TOC at point
+- [X] Update header documentation
+- [X] Update README.md about use case
+- [X] Makefile
+- [X] Tests
+- [X] Travis-ci
+- [X] Upgrade version + package
+- [X] Release notes

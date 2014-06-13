@@ -10,8 +10,9 @@ markdown-toc [![Build Status](https://travis-ci.org/ardumont/markdown-toc.png?br
         - [Setup](#setup)
             - [melpa stable](#melpa-stable)
             - [melpa](#melpa)
+            - [marmalade](#marmalade)
         - [Install](#install)
-    - [Tarball](#tarball)
+    - [emacs-lisp file](#emacs-lisp-file)
 - [Inspiration](#inspiration)
 
 <!-- markdown-toc end -->
@@ -83,21 +84,23 @@ Then hit <kbd>M-x eval-buffer</kbd> to evaluate the buffer's contents.
 
 Then hit <kbd>M-x eval-buffer</kbd> to evaluate the buffer's contents.
 
+#### marmalade
+
+``` lisp
+(require 'package)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
+```
+
 ### Install
 
 <kbd>M-x package-install RET markdown-toc RET</kbd>
 
-Then somewhere in your *~/.emacs.d/init.el* or *~/.emacs*, require markdown-toc.
+## emacs-lisp file
 
-```lisp
-(require 'markdown-toc)
-```
+Retrieve the markdown-toc.el https://github.com/ardumont/markdown-toc/releases.
 
-## Tarball
-
-Retrieve the tarball https://github.com/ardumont/markdown-toc/releases.
-
-Then hit <kbd>M-x package-install-file RET markdown-toc.tar RET</kbd>
+Then hit <kbd>M-x package-install-file RET markdown-toc.el RET</kbd>
 
 # Inspiration
 
