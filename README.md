@@ -87,11 +87,9 @@ Then hit <kbd>M-x eval-buffer</kbd> to evaluate the buffer's contents.
 
 <kbd>M-x package-install RET markdown-toc RET</kbd>
 
-Then somewhere in your *~/.emacs.d/init.el* or *~/.emacs*, require markdown-toc.
+### Install
 
-```lisp
-(require 'markdown-toc)
-```
+<kbd>M-x package-install RET markdown-toc RET</kbd>
 
 ## emacs-lisp file
 
