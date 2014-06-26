@@ -91,7 +91,12 @@
 
 (defun markdown-toc/--to-link (title)
   "Given a TITLE, return the markdown link associated."
-  (format "[%s](#%s)" title (replace-regexp-in-string " " "-" (downcase title))))
+  (format "[%s](#%s)" title
+          (->>
+            title
+            downcase
+            (replace-regexp-in-string "[^a-z0-9 -]" "")
+            (s-replace " " "-"))))
 
 (defun markdown-toc/--to-markdown-toc (level-title-toc-list)
   "Given LEVEL-TITLE-TOC-LIST, a list of pair level, title, return a TOC string."
