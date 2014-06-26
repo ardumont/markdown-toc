@@ -1,7 +1,7 @@
 markdown-toc [![Build Status](https://travis-ci.org/ardumont/markdown-toc.png?branch=master)](https://travis-ci.org/ardumont/markdown-toc)
 ============
 
-<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
 **Table of Contents**
 
 - [Use](#use)
@@ -30,7 +30,7 @@ This will compute the TOC and insert it at current position.
 Here is one possible output:
 
 ```markdown
-<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
 **Table of Contents**
 
 - [some markdown page title](#some-markdown-page-title)

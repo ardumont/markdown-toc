@@ -33,7 +33,7 @@
 ;; Afterwards, if a TOC is already present, it will update the one present in buffer.
 
 ;; Here is a possible output:
-;; <!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
+;; <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
 ;; **Table of Contents**
 
 ;; - [some markdown page title](#some-markdown-page-title)
@@ -101,7 +101,7 @@
              (format "%s- %s" (markdown-toc/--symbol " " nb-spaces) (markdown-toc/--to-link title))))
     (s-join "\n")))
 
-(defconst *markdown-toc/header-toc-start* "<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->")
+(defconst *markdown-toc/header-toc-start* "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->")
 (defconst *markdown-toc/header-toc-title* "**Table of Contents**")
 (defconst *markdown-toc/header-toc-end*   "<!-- markdown-toc end -->")
 
