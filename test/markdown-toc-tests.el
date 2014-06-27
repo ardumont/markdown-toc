@@ -7,16 +7,16 @@
  (expect "-#--#--#-" (markdown-toc/--symbol "-#-" 3)))
 
 (expectations
- (expect "[some markdown page title](#some-markdown-page-title)"
-         (markdown-toc/--to-link "some markdown page title")))
+ (expect "[some markdown page~title (foo).](#some-markdown-pagetitle-foo)"
+         (markdown-toc/--to-link "some markdown page~title (foo).")))
 
 (expectations
   (expect "- [some markdown page title](#some-markdown-page-title)
 - [main title](#main-title)
     - [Sources](#sources)
-        - [Marmalade (recommended)](#marmalade-(recommended))
+        - [Marmalade (recommended)](#marmalade-recommended)
         - [Melpa-stable](#melpa-stable)
-        - [Melpa (~snapshot)](#melpa-(~snapshot))
+        - [Melpa (~snapshot)](#melpa-snapshot)
     - [Install](#install)
         - [Load org-trello](#load-org-trello)
         - [Alternative](#alternative)
@@ -98,9 +98,9 @@
 **Table of Contents**
 
 - [-](#-)
-    - [Marmalade (recommended)](#marmalade-(recommended))
+    - [Marmalade (recommended)](#marmalade-recommended)
     - [Melpa-stable](#melpa-stable)
-    - [Melpa (~snapshot)](#melpa-(~snapshot))
+    - [Melpa (~snapshot)](#melpa-snapshot)
     - [Install](#install)
         - [Load org-trello](#load-org-trello)
         - [Alternative](#alternative)
@@ -147,9 +147,9 @@ For this, you need to install a snippet of code in your emacs configuration file
 **Table of Contents**
 
 - [-](#-)
-    - [Marmalade (recommended)](#marmalade-(recommended))
+    - [Marmalade (recommended)](#marmalade-recommended)
     - [Melpa-stable](#melpa-stable)
-    - [Melpa (~snapshot)](#melpa-(~snapshot))
+    - [Melpa (~snapshot)](#melpa-snapshot)
     - [Install](#install)
         - [Load org-trello](#load-org-trello)
         - [Alternative](#alternative)
@@ -177,7 +177,7 @@ For this, you need to install a snippet of code in your emacs configuration file
 **Table of Contents**
 
 - [-](#-)
-    - [Melpa (~snapshot)](#melpa-(~snapshot))
+    - [Melpa (~snapshot)](#melpa-snapshot)
     - [Install](#install)
         - [Load org-trello](#load-org-trello)
         - [Alternative](#alternative)
