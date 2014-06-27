@@ -89,12 +89,12 @@
 
 (expectations
   (expect
-      "<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->\n**Table of Contents**\n\nsome-toc\n\n<!-- markdown-toc end -->\n"
+      "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->\n**Table of Contents**\n\nsome-toc\n\n<!-- markdown-toc end -->\n"
     (markdown-toc/--compute-full-toc "some-toc")))
 
 ;; Create a new TOC
 (expectations
-  (expect "<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
+  (expect "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
 **Table of Contents**
 
 - [-](#-)
@@ -143,7 +143,7 @@ For this, you need to install a snippet of code in your emacs configuration file
 
 (expectations
   ;; Update an existing TOC
-  (expect "<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
+  (expect "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
 **Table of Contents**
 
 - [-](#-)
@@ -173,7 +173,7 @@ For this, you need to install a snippet of code in your emacs configuration file
     (with-temp-buffer
       (markdown-mode)
       (require 'markdown-toc)
-      (insert "<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
+      (insert "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
 **Table of Contents**
 
 - [-](#-)
