@@ -1,7 +1,8 @@
  #+title: dev backlog
 #+author: ardumont
 
-* IN-PROGRESS 0.0.6 [100%]
+* DONE 0.0.6 [100%]
+CLOSED: [2014-06-30 Mon 13:10]
 - [X] Fix typo on the markdown header information
 - [X] Strip non-ASCII characters from heading links, to be consistent with GitHub.
 - [X] Update version
