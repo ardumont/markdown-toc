@@ -1,6 +1,12 @@
  #+title: dev backlog
 #+author: ardumont
 
+* IN-PROGRESS 0.0.6 [50%]
+- [X] Fix typo on the markdown header information
+- [X] Strip non-ASCII characters from heading links, to be consistent with GitHub.
+- [ ] Update version
+- [ ] Release notes
+
 * DONE 0.0.5 [100%]
 CLOSED: [2014-06-13 Fri 17:39]
 - [X] Deploy to Marmalade
