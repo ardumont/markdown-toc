@@ -1,3 +1,10 @@
+# 0.0.6
+
+- [X] Fix typo on the markdown header information
+- [X] Strip non-ASCII characters from heading links, to be consistent with GitHub.
+- [X] Update version
+- [X] Release notes
+
 # 0.0.5
 
 - [X] Deploy to Marmalade
