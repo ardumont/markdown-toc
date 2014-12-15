@@ -145,19 +145,21 @@ Return the end position if it exists, nil otherwise."
           *markdown-toc/header-toc-end*))
 
 ;;;###autoload
-(defun markdown-toc/generate-toc ()
-  "Generate a TOC for markdown file at current position.
-Afterward, if a TOC is already present in the buffer, it will update it."
-  (interactive)
-  (when (markdown-toc/--toc-already-present-p!)
-    ;; when toc already present, remove it
-    (let ((region-start (markdown-toc/--toc-start!))
-          (region-end   (markdown-toc/--toc-end!)))
-      (delete-region region-start (1+ region-end))))
-  ;; generate the toc
-  (-> (markdown-imenu-create-index)
-    markdown-toc/--generate-toc
-    insert))
+(defun markdown-toc/generate-toc (&optional replace-toc-p)
+  "Generate a TOC for markdown file at current point. Deletes any previous TOC. If called interactively with prefix argument, replaces previous TOC."
+  (interactive "P")
+  (save-excursion
+    (when (markdown-toc/--toc-already-present-p!)
+      ;; when toc already present, remove it
+      (let ((region-start (markdown-toc/--toc-start!))
+            (region-end   (markdown-toc/--toc-end!)))
+        (delete-region region-start (1+ region-end))
+        (if replace-toc-p
+            (goto-char region-start))))
+    ;; generate the toc
+    (-> (markdown-imenu-create-index)
+      markdown-toc/--generate-toc
+      insert)))
 
 (provide 'markdown-toc)
 ;;; markdown-toc.el ends here
