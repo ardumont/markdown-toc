@@ -1,7 +1,8 @@
  #+title: dev backlog
 #+author: ardumont
 
-* IN-PROGRESS 0.0.7 [100%]
+* DONE 0.0.7 [100%]
+CLOSED: [2014-12-15 Mon 23:31]
 - [X] Add prefix argument to `markdown-toc/generate-toc' to replace existing TOC at the same location #10
 - [X] Simplify tests launcher
 - [X] Add itest on toc generation when using modifier  [2/2]
