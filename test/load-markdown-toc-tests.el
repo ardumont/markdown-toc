@@ -2,10 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'ert)
-(require 'ert-expectations)
-(require 'el-mock)
-
 (message "Launching tests!")
 
 ;; load code prod
@@ -15,9 +11,6 @@
 (add-to-list 'load-path (expand-file-name "./test"))
 
 (message "Loading tests done!")
-
-;; behaviour of expectations changed
-(setq expectations-execute-at-once t)
 
 (require 'markdown-toc)
 

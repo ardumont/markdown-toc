@@ -1,3 +1,14 @@
+# 0.0.7
+
+- [X] Add prefix argument to `markdown-toc/generate-toc' to replace existing TOC at the same location #10
+- [X] Simplify tests launcher
+- [X] Add itest on toc generation when using modifier  [2/2]
+  - [X] Use ert to simplify tests output reading in case of error
+  - [X] Add test on the new use case from #10
+- [X] Update README.md
+- [X] Update version
+- [X] Release notes
+
 # 0.0.6
 
 - [X] Fix typo on the markdown header information

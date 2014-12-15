@@ -5,6 +5,9 @@ markdown-toc [![Build Status](https://travis-ci.org/ardumont/markdown-toc.png?br
 **Table of Contents**
 
 - [Use](#use)
+    - [Create](#create)
+    - [Update](#update)
+    - [Create elsewhere](#create-elsewhere)
 - [Install](#install)
     - [emacs package repository](#emacs-package-repository)
         - [Setup](#setup)
@@ -20,6 +23,8 @@ markdown-toc [![Build Status](https://travis-ci.org/ardumont/markdown-toc.png?br
 A simple mode to create TOC in a markdown file.
 
 # Use
+
+## Create
 
 Inside a markdown file, the first time, place yourself where you want to insert the TOC:
 
@@ -52,9 +57,15 @@ Here is one possible output:
 <!-- markdown-toc end -->
 ```
 
-To update the TOC, simply execute again: <kbd>M-x markdown-toc/generate-toc</kbd>
+## Update
+
+To update the existing TOC, simply execute again: <kbd>C-u M-x markdown-toc/generate-toc</kbd>
 
 This will update the current TOC.
+
+## Create elsewhere
+
+To create another updated TOC elsewhere, execute again <kbd>M-x markdown-toc/generate-toc</kbd>, this will remove the old TOC and insert the updated one from where you stand.
 
 # Install
 
