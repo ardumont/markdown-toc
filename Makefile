@@ -25,7 +25,7 @@ install:
 test: clean
 	cask exec $(EMACS) --batch \
 			-l ert \
-			-l ./test/launch-tests.el \
+			-l ./test/load-markdown-toc-tests.el \
 			-f ert-run-tests-batch-and-exit
 
 pkg-file:

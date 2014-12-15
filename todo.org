@@ -1,6 +1,11 @@
  #+title: dev backlog
 #+author: ardumont
 
+* IN-PROGRESS 0.6.7 [50%]
+- [X] Add prefix argument to `markdown-toc/generate-toc' to replace existing TOC at the same location #10
+- [X] Simplify tests launcher
+- [ ] Update version
+- [ ] Release notes
 * DONE 0.0.6 [100%]
 CLOSED: [2014-06-30 Mon 13:10]
 - [X] Fix typo on the markdown header information
