@@ -1,17 +1,16 @@
 (require 'ert)
-(require 'ert-expectations)
 (require 'el-mock)
 
-(expectations
- (expect "   "       (markdown-toc/--symbol " " 3))
- (expect "-#--#--#-" (markdown-toc/--symbol "-#-" 3)))
+(ert-deftest markdown-toc/--symbol ()
+  (should (equal "   "       (markdown-toc/--symbol " " 3)))
+  (should (equal "-#--#--#-" (markdown-toc/--symbol "-#-" 3))))
 
-(expectations
- (expect "[some markdown page~title (foo).](#some-markdown-pagetitle-foo)"
-         (markdown-toc/--to-link "some markdown page~title (foo).")))
+(ert-deftest markdown-toc/--to-link ()
+  (should (equal "[some markdown page~title (foo).](#some-markdown-pagetitle-foo)"
+                 (markdown-toc/--to-link "some markdown page~title (foo)."))))
 
-(expectations
-  (expect "- [some markdown page title](#some-markdown-page-title)
+(ert-deftest markdown-toc/--to-markdown-toc ()
+  (should (equal "- [some markdown page title](#some-markdown-page-title)
 - [main title](#main-title)
     - [Sources](#sources)
         - [Marmalade (recommended)](#marmalade-recommended)
@@ -26,75 +25,75 @@
     - [with](#with)
     - [some](#some)
     - [heading](#heading)"
-    (markdown-toc/--to-markdown-toc '((0 . "some markdown page title")
-                                      (0 . "main title")
-                                      (1 . "Sources")
-                                      (2 . "Marmalade (recommended)")
-                                      (2 . "Melpa-stable")
-                                      (2 . "Melpa (~snapshot)")
-                                      (1 . "Install")
-                                      (2 . "Load org-trello")
-                                      (2 . "Alternative")
-                                      (3 . "Git")
-                                      (3 . "Tar")
-                                      (0 . "another title")
-                                      (1 . "with")
-                                      (1 . "some")
-                                      (1 . "heading")))))
+                 (markdown-toc/--to-markdown-toc '((0 . "some markdown page title")
+                                                   (0 . "main title")
+                                                   (1 . "Sources")
+                                                   (2 . "Marmalade (recommended)")
+                                                   (2 . "Melpa-stable")
+                                                   (2 . "Melpa (~snapshot)")
+                                                   (1 . "Install")
+                                                   (2 . "Load org-trello")
+                                                   (2 . "Alternative")
+                                                   (3 . "Git")
+                                                   (3 . "Tar")
+                                                   (0 . "another title")
+                                                   (1 . "with")
+                                                   (1 . "some")
+                                                   (1 . "heading"))))))
 
-(expectations
-  (expect '((0 . "Sources") (1 . "Marmalade (recommended)") (1 . "Melpa-stable"))
-    (markdown-toc/--compute-toc-structure-from-level
-     0
-     '("Sources" ("." . 130) ("Marmalade (recommended)" . 311) ("Melpa-stable" . 552))))
+(ert-deftest markdown-toc/--compute-toc-structure-from-level ()
+  (should (equal '((0 . "Sources") (1 . "Marmalade (recommended)") (1 . "Melpa-stable"))
+                 (markdown-toc/--compute-toc-structure-from-level
+                  0
+                  '("Sources" ("." . 130) ("Marmalade (recommended)" . 311) ("Melpa-stable" . 552)))))
 
-  (expect '((0 . "Install") (1 . "Load org-trello") (1 . "Alternative") (2 . "Git") (2 . "Tar"))
-    (markdown-toc/--compute-toc-structure-from-level
-     0
-     '("Install" ("." . 1184) ("Load org-trello" . 1277) ("Alternative" ("." . 1563) ("Git" . 1580) ("Tar" . 1881)))))
-  (expect '((0 . "some markdown page title"))
-    (markdown-toc/--compute-toc-structure-from-level
-     0
-     '("some markdown page title" . 1))))
+  (should (equal '((0 . "Install") (1 . "Load org-trello") (1 . "Alternative") (2 . "Git") (2 . "Tar"))
+                 (markdown-toc/--compute-toc-structure-from-level
+                  0
+                  '("Install" ("." . 1184) ("Load org-trello" . 1277) ("Alternative" ("." . 1563) ("Git" . 1580) ("Tar" . 1881))))))
+  (should (equal '((0 . "some markdown page title"))
+                 (markdown-toc/--compute-toc-structure-from-level
+                  0
+                  '("some markdown page title" . 1)))))
 
-(expectations
- (expect
-  '((0 . "some markdown page title")
-    (0 . "main title")
-    (1 . "Sources")
-    (2 . "Marmalade (recommended)")
-    (2 . "Melpa-stable")
-    (2 . "Melpa (~snapshot)")
-    (1 . "Install")
-    (2 . "Load org-trello")
-    (2 . "Alternative")
-    (3 . "Git")
-    (3 . "Tar")
-    (0 . "another title")
-    (1 . "with")
-    (1 . "some")
-    (1 . "heading"))
-  (markdown-toc/--compute-toc-structure
-   '(("some markdown page title" . 1)
-     ("main title"
-      (#1="." . 52)
-      ("Sources" (#1# . 130) ("Marmalade (recommended)" . 311) ("Melpa-stable" . 552) ("Melpa (~snapshot)" . 792))
-      ("Install" (#1# . 1184) ("Load org-trello" . 1277) ("Alternative" (#1# . 1563) ("Git" . 1580) ("Tar" . 1881))))
+(ert-deftest markdown-toc/--compute-toc-structure ()
+  (should (equal
+           '((0 . "some markdown page title")
+             (0 . "main title")
+             (1 . "Sources")
+             (2 . "Marmalade (recommended)")
+             (2 . "Melpa-stable")
+             (2 . "Melpa (~snapshot)")
+             (1 . "Install")
+             (2 . "Load org-trello")
+             (2 . "Alternative")
+             (3 . "Git")
+             (3 . "Tar")
+             (0 . "another title")
+             (1 . "with")
+             (1 . "some")
+             (1 . "heading"))
+           (markdown-toc/--compute-toc-structure
+            '(("some markdown page title" . 1)
+              ("main title"
+               (#1="." . 52)
+               ("Sources" (#1# . 130) ("Marmalade (recommended)" . 311) ("Melpa-stable" . 552) ("Melpa (~snapshot)" . 792))
+               ("Install" (#1# . 1184) ("Load org-trello" . 1277) ("Alternative" (#1# . 1563) ("Git" . 1580) ("Tar" . 1881))))
 
-     ("another title"
-      (#1# . 2044)
-      ("with" . 2061)
-      ("some" . 2070)
-      ("heading" . 2079))))))
+              ("another title"
+               (#1# . 2044)
+               ("with" . 2061)
+               ("some" . 2070)
+               ("heading" . 2079)))))))
 
-(expectations
-  (expect
-      "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->\n**Table of Contents**\n\nsome-toc\n\n<!-- markdown-toc end -->\n"
-    (markdown-toc/--compute-full-toc "some-toc")))
+(ert-deftest markdown-toc/--compute-full-toc ()
+  (should (equal
+           "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->\n**Table of Contents**\n\nsome-toc\n\n<!-- markdown-toc end -->\n"
+           (markdown-toc/--compute-full-toc "some-toc"))))
 
 ;; Create a new TOC
-(expectations
-  (expect "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
+(ert-deftest markdown-toc/generate-toc--first-toc ()
+  (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
 **Table of Contents**
 
 - [-](#-)
@@ -121,10 +120,10 @@ For this, you need to install a snippet of code in your emacs configuration file
 #### Git
 #### Tar
 "
-    (with-temp-buffer
-      (markdown-mode)
-      (require 'markdown-toc)
-      (insert "To install **org-trello** in your emacs, you need a few steps.
+                 (with-temp-buffer
+                   (markdown-mode)
+                   (require 'markdown-toc)
+                   (insert "To install **org-trello** in your emacs, you need a few steps.
 ## Sources
 If not already configured, you need to prepare emacs to work with marmalade or melpa.
 For this, you need to install a snippet of code in your emacs configuration file.
@@ -137,13 +136,13 @@ For this, you need to install a snippet of code in your emacs configuration file
 #### Git
 #### Tar
 ")
-      (goto-char (point-min))
-      (markdown-toc/generate-toc)
-      (buffer-substring-no-properties (point-min) (point-max)))))
+                   (goto-char (point-min))
+                   (markdown-toc/generate-toc)
+                   (buffer-substring-no-properties (point-min) (point-max))))))
 
-(expectations
+(ert-deftest markdown-toc/generate-toc--replace-old-toc ()
   ;; Update an existing TOC
-  (expect "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
+  (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
 **Table of Contents**
 
 - [-](#-)
@@ -170,10 +169,10 @@ For this, you need to install a snippet of code in your emacs configuration file
 #### Git
 #### Tar
 "
-    (with-temp-buffer
-      (markdown-mode)
-      (require 'markdown-toc)
-      (insert "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
+                 (with-temp-buffer
+                   (markdown-mode)
+                   (require 'markdown-toc)
+                   (insert "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
 **Table of Contents**
 
 - [-](#-)
@@ -198,9 +197,9 @@ For this, you need to install a snippet of code in your emacs configuration file
 #### Git
 #### Tar
 ")
-      (goto-char (point-min))
-      (markdown-toc/generate-toc)
-      (buffer-substring-no-properties (point-min) (point-max)))))
+                   (goto-char (point-min))
+                   (markdown-toc/generate-toc)
+                   (buffer-substring-no-properties (point-min) (point-max))))))
 
 (provide 'markdown-toc-tests)
 ;;; markdown-toc-tests.el ends here
