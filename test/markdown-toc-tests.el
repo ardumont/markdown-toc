@@ -141,7 +141,6 @@ For this, you need to install a snippet of code in your emacs configuration file
                    (buffer-substring-no-properties (point-min) (point-max))))))
 
 (ert-deftest markdown-toc/generate-toc--replace-old-toc ()
-  ;; Update an existing TOC
   (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
 **Table of Contents**
 
@@ -199,6 +198,71 @@ For this, you need to install a snippet of code in your emacs configuration file
 ")
                    (goto-char (point-min))
                    (markdown-toc/generate-toc)
+                   (buffer-substring-no-properties (point-min) (point-max))))))
+
+(ert-deftest markdown-toc/generate-toc--replace-old-toc ()
+  ;; Update an existing TOC
+  (should (equal "some foo bar before
+
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
+**Table of Contents**
+
+- [-](#-)
+    - [Marmalade (recommended)](#marmalade-recommended)
+    - [Melpa-stable](#melpa-stable)
+    - [Melpa (~snapshot)](#melpa-snapshot)
+    - [Install](#install)
+        - [Load org-trello](#load-org-trello)
+        - [Alternative](#alternative)
+            - [Git](#git)
+            - [Tar](#tar)
+
+<!-- markdown-toc end -->
+To install **org-trello** in your emacs, you need a few steps.
+## Sources
+If not already configured, you need to prepare emacs to work with marmalade or melpa.
+For this, you need to install a snippet of code in your emacs configuration file.
+### Marmalade (recommended)
+### Melpa-stable
+### Melpa (~snapshot)
+## Install
+### Load org-trello
+### Alternative
+#### Git
+#### Tar
+"
+                 (with-temp-buffer
+                   (markdown-mode)
+                   (require 'markdown-toc)
+                   (insert "some foo bar before
+
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
+**Table of Contents**
+
+- [-](#-)
+    - [Melpa (~snapshot)](#melpa-snapshot)
+    - [Install](#install)
+        - [Load org-trello](#load-org-trello)
+        - [Alternative](#alternative)
+            - [Git](#git)
+            - [Tar](#tar)
+
+<!-- markdown-toc end -->
+To install **org-trello** in your emacs, you need a few steps.
+## Sources
+If not already configured, you need to prepare emacs to work with marmalade or melpa.
+For this, you need to install a snippet of code in your emacs configuration file.
+### Marmalade (recommended)
+### Melpa-stable
+### Melpa (~snapshot)
+## Install
+### Load org-trello
+### Alternative
+#### Git
+#### Tar
+")
+                   (goto-char (point-min))
+                   (markdown-toc/generate-toc 'replace-old-toc)
                    (buffer-substring-no-properties (point-min) (point-max))))))
 
 (provide 'markdown-toc-tests)
