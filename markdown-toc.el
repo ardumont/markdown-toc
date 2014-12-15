@@ -28,9 +28,9 @@
 
 ;;; Commentary:
 
-;; Inside a markdown - M-x markdown-toc/generate-toc
+;; Generate a TOC from a markdown file: M-x markdown-toc/generate-toc
 ;; This will compute the TOC at insert it at current position.
-;; Afterwards, if a TOC is already present, it will update the one present in buffer.
+;; Update existing TOC: C-u M-x markdown-toc/generate-toc
 
 ;; Here is a possible output:
 ;; <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
@@ -146,7 +146,9 @@ Return the end position if it exists, nil otherwise."
 
 ;;;###autoload
 (defun markdown-toc/generate-toc (&optional replace-toc-p)
-  "Generate a TOC for markdown file at current point. Deletes any previous TOC. If called interactively with prefix argument, replaces previous TOC."
+  "Generate a TOC for markdown file at current point.
+Deletes any previous TOC.
+If called interactively with prefix arg REPLACE-TOC-P, replaces previous TOC."
   (interactive "P")
   (save-excursion
     (when (markdown-toc/--toc-already-present-p!)
