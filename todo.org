@@ -1,12 +1,12 @@
  #+title: dev backlog
 #+author: ardumont
 
-* IN-PROGRESS 0.0.8 [66%]
+* IN-PROGRESS 0.0.8 [83%]
 - [X] Add test coverage
 - [X] Improve CI code
 - [X] Respect elisp conventions
 - [X] Update version
-- [ ] Update version dependencies
+- [X] Update version dependencies
 - [ ] Release notes
 * DONE 0.0.7 [100%]
 CLOSED: [2014-12-15 Mon 23:31]
