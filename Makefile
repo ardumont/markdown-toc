@@ -22,11 +22,11 @@ clean: clean-dist
 install:
 	cask install
 
+test-init:
+	cask exec ert-runner init
+
 test: clean
-	cask exec $(EMACS) --batch \
-			-l ert \
-			-l ./test/load-markdown-toc-tests.el \
-			-f ert-run-tests-batch-and-exit
+	cask exec ert-runner
 
 pkg-file:
 	cask pkg-file
