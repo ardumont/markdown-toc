@@ -1,13 +1,13 @@
  #+title: dev backlog
 #+author: ardumont
 
-* IN-PROGRESS 0.0.8 [83%]
+* IN-PROGRESS 0.0.8 [100%]
 - [X] Add test coverage
 - [X] Improve CI code
 - [X] Respect elisp conventions
 - [X] Update version
 - [X] Update version dependencies
-- [ ] Release notes
+- [X] Release notes
 * DONE 0.0.7 [100%]
 CLOSED: [2014-12-15 Mon 23:31]
 - [X] Add prefix argument to `markdown-toc/generate-toc' to replace existing TOC at the same location #10
