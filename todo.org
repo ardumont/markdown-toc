@@ -4,7 +4,9 @@
 * IN-PROGRESS 0.0.8 [50%]
 - [X] Add test coverage
 - [X] Improve CI code
-- [ ] Respect elisp conventions
+- [X] Respect elisp conventions
+- [ ] Update version
+- [ ] Update version dependencies
 - [ ] Release notes
 * DONE 0.0.7 [100%]
 CLOSED: [2014-12-15 Mon 23:31]
