@@ -1,3 +1,12 @@
+# 0.0.8
+
+- [X] Add test coverage
+- [X] Improve CI code
+- [X] Respect elisp conventions
+- [X] Update version
+- [X] Update version dependencies
+- [X] Release notes
+
 # 0.0.7
 
 - [X] Add prefix argument to `markdown-toc/generate-toc' to replace existing TOC at the same location #10
