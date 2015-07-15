@@ -1,7 +1,7 @@
-VERSION=$$(grep "^;; Version: " markdown-toc.el | cut -f3 -d' ')
-PACKAGE_FOLDER=markdown-toc-$(VERSION)
+MODE_NAME=markdown-toc
+VERSION=$$(grep "^;; Version: " $(MODE_NAME).el | cut -f3 -d' ')
+PACKAGE_FOLDER=$(MODE_NAME)-$(VERSION)
 ARCHIVE=$(PACKAGE_FOLDER).tar
-USER=ardumont
 EMACS=emacs
 
 .PHONY: clean
@@ -40,6 +40,9 @@ package: clean pkg-el
 
 info:
 	cask info
+
+release:
+	./release.sh $(VERSION)
 
 install-cask:
 	curl -fsSkL https://raw.github.com/cask/cask/master/go | python
