@@ -1,5 +1,6 @@
 (require 'ert)
 (require 'el-mock)
+(require 'markdown-toc)
 
 (ert-deftest markdown-toc--symbol ()
   (should (equal "   "       (markdown-toc--symbol " " 3)))
@@ -91,6 +92,19 @@
            "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->\n**Table of Contents**\n\nsome-toc\n\n<!-- markdown-toc end -->\n"
            (markdown-toc--compute-full-toc "some-toc"))))
 
+(defmacro markdown-toc-with-temp-buffer-and-return-buffer-content (text body-test)
+  "A `markdown-toc' test macro to ease testing.
+TEXT is the content of the buffer.
+BODY-TEST is the assertion to test on the buffer.
+NB-LINES-FORWARD is the number of lines to get back to."
+  `(with-temp-buffer
+     (markdown-mode)
+     (insert ,text)
+     (progn
+       (goto-char (point-min))
+       ,body-test
+       (buffer-substring-no-properties (point-min) (point-max)))))
+
 ;; Create a new TOC
 (ert-deftest markdown-toc-generate-toc--first-toc ()
   (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
@@ -120,10 +134,8 @@ For this, you need to install a snippet of code in your emacs configuration file
 #### Git
 #### Tar
 "
-                 (with-temp-buffer
-                   (markdown-mode)
-                   (require 'markdown-toc)
-                   (insert "To install **org-trello** in your emacs, you need a few steps.
+                 (markdown-toc-with-temp-buffer-and-return-buffer-content
+                  "To install **org-trello** in your emacs, you need a few steps.
 ## Sources
 If not already configured, you need to prepare emacs to work with marmalade or melpa.
 For this, you need to install a snippet of code in your emacs configuration file.
@@ -135,10 +147,8 @@ For this, you need to install a snippet of code in your emacs configuration file
 ### Alternative
 #### Git
 #### Tar
-")
-                   (goto-char (point-min))
-                   (markdown-toc-generate-toc)
-                   (buffer-substring-no-properties (point-min) (point-max))))))
+"
+                  (markdown-toc-generate-toc)))))
 
 (ert-deftest markdown-toc-generate-toc--replace-old-toc ()
   (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
@@ -168,10 +178,8 @@ For this, you need to install a snippet of code in your emacs configuration file
 #### Git
 #### Tar
 "
-                 (with-temp-buffer
-                   (markdown-mode)
-                   (require 'markdown-toc)
-                   (insert "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
+                 (markdown-toc-with-temp-buffer-and-return-buffer-content
+                  "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Table of Contents**
 
 - [-](#-)
@@ -195,10 +203,8 @@ For this, you need to install a snippet of code in your emacs configuration file
 ### Alternative
 #### Git
 #### Tar
-")
-                   (goto-char (point-min))
-                   (markdown-toc-generate-toc)
-                   (buffer-substring-no-properties (point-min) (point-max))))))
+"
+                  (markdown-toc-generate-toc)))))
 
 (ert-deftest markdown-toc-generate-toc--replace-old-toc ()
   ;; Update an existing TOC
@@ -231,10 +237,8 @@ For this, you need to install a snippet of code in your emacs configuration file
 #### Git
 #### Tar
 "
-                 (with-temp-buffer
-                   (markdown-mode)
-                   (require 'markdown-toc)
-                   (insert "some foo bar before
+                 (markdown-toc-with-temp-buffer-and-return-buffer-content
+                  "some foo bar before
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Table of Contents**
@@ -260,10 +264,8 @@ For this, you need to install a snippet of code in your emacs configuration file
 ### Alternative
 #### Git
 #### Tar
-")
-                   (goto-char (point-min))
-                   (markdown-toc-generate-toc 'replace-old-toc)
-                   (buffer-substring-no-properties (point-min) (point-max))))))
+"
+                  (markdown-toc-generate-toc 'replace-old-toc)))))
 
 (provide 'markdown-toc-tests)
 ;;; markdown-toc-tests.el ends here
