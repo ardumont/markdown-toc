@@ -79,7 +79,9 @@
            (tail  (cdr menu-index))
            (ttail (if (integerp tail) nil (cdr tail))))
       (cons `(,level . ,fst)
-            (--mapcat (markdown-toc--compute-toc-structure-from-level (+ 1 level) it) ttail)))))
+            (--mapcat
+             (markdown-toc--compute-toc-structure-from-level (+ 1 level) it)
+             ttail)))))
 
 (defun markdown-toc--compute-toc-structure (imenu-index)
   "Given a IMENU-INDEX, compute the TOC structure."
@@ -94,23 +96,26 @@
 (defun markdown-toc--to-link (title)
   "Given a TITLE, return the markdown link associated."
   (format "[%s](#%s)" title
-          (->>
-            title
-            downcase
-            (replace-regexp-in-string "[^a-z0-9 -]" "")
-            (s-replace " " "-"))))
+          (->> title
+               downcase
+               (replace-regexp-in-string "[^a-z0-9 -]" "")
+               (s-replace " " "-"))))
 
 (defun markdown-toc--to-markdown-toc (level-title-toc-list)
   "Given LEVEL-TITLE-TOC-LIST, a list of pair level, title, return a TOC string."
   (->> level-title-toc-list
-    (--map (let ((nb-spaces (* 4 (car it)))
-                 (title     (cdr it)))
-             (format "%s- %s" (markdown-toc--symbol " " nb-spaces) (markdown-toc--to-link title))))
-    (s-join "\n")))
+       (--map (let ((nb-spaces (* 4 (car it)))
+                    (title     (cdr it)))
+                (format "%s- %s" (markdown-toc--symbol " " nb-spaces)
+                        (markdown-toc--to-link title))))
+       (s-join "\n")))
 
-(defconst markdown-toc--header-toc-start "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->")
-(defconst markdown-toc--header-toc-title "**Table of Contents**")
-(defconst markdown-toc--header-toc-end   "<!-- markdown-toc end -->")
+(defconst markdown-toc--header-toc-start
+  "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->")
+(defconst markdown-toc--header-toc-title
+  "**Table of Contents**")
+(defconst markdown-toc--header-toc-end
+  "<!-- markdown-toc end -->")
 
 (defun markdown-toc--toc-already-present-p ()
   "Determine if a TOC has already been generated.
@@ -158,9 +163,8 @@ If called interactively with prefix arg REPLACE-TOC-P, replaces previous TOC."
       (let ((region-start (markdown-toc--toc-start))
             (region-end   (markdown-toc--toc-end)))
         (delete-region region-start (1+ region-end))
-        (if replace-toc-p
-            (goto-char region-start))))
-    ;; generate the toc
+        (when replace-toc-p
+          (goto-char region-start))))
     (-> (markdown-imenu-create-index)
         markdown-toc--generate-toc
         insert)))
