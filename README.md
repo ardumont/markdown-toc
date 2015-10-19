@@ -77,7 +77,7 @@ You need to add melpa or melpa-stable package repository before installing it.
 
 ``` lisp
 (require 'package)
-(add-to-list 'package-archives '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
 (package-initialize)
 ```
 
@@ -87,7 +87,7 @@ Then hit <kbd>M-x eval-buffer</kbd> to evaluate the buffer's contents.
 
 ``` lisp
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 ```
 
