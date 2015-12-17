@@ -136,10 +136,9 @@ Return the end position if it exists, nil otherwise."
     (goto-char (point-min))
     (re-search-forward markdown-toc--header-toc-end nil t)))
 
-(defun markdown-toc--generate-toc (toc-index)
-  "Given a TOC-INDEX, compute a new toc."
-  (-> toc-index
-      markdown-toc--compute-toc-structure
+(defun markdown-toc--generate-toc (toc-structure)
+  "Given a TOC-STRUCTURE, compute a new toc."
+  (-> toc-structure
       markdown-toc--to-markdown-toc
       markdown-toc--compute-full-toc))
 
@@ -151,7 +150,34 @@ Return the end position if it exists, nil otherwise."
           toc
           markdown-toc--header-toc-end))
 
+(defcustom markdown-toc-user-toc-structure-manipulation-fn (lambda (toc-structure) toc-structure)
+  "User crafted function to manipulate toc-structure as user sees fit.
+
+The toc-structure has the following form:
+'((0 . \"some markdown page title\")
+  (0 . \"main title\")
+  (1 . \"Sources\")
+  (2 . \"Marmalade (recommended)\")
+  (2 . \"Melpa-stable\")
+  (2 . \"Melpa (~snapshot)\")
+  (1 . \"Install\")
+  (2 . \"Load org-trello\")
+  (2 . \"Alternative\")
+  (3 . \"Git\")
+  (3 . \"Tar\")
+  (0 . \"another title\")
+  (1 . \"with\")
+  (1 . \"some\")
+  (1 . \"heading\"))
+
+If the user wanted to remove the first element, it could for
+example define the following function:
+(custom-set-variables '(markdown-toc-user-toc-structure-manipulation-fn 'cdr))
+
+Default to identity function (do nothing).")
+
 ;;;###autoload
+
 (defun markdown-toc-generate-toc (&optional replace-toc-p)
   "Generate a TOC for markdown file at current point.
 Deletes any previous TOC.
@@ -165,9 +191,11 @@ If called interactively with prefix arg REPLACE-TOC-P, replaces previous TOC."
         (delete-region region-start (1+ region-end))
         (when replace-toc-p
           (goto-char region-start))))
-    (-> (markdown-imenu-create-index)
-        markdown-toc--generate-toc
-        insert)))
+    (->> (markdown-imenu-create-index)
+         markdown-toc--compute-toc-structure
+         (funcall markdown-toc-user-toc-structure-manipulation-fn)
+         markdown-toc--generate-toc
+         insert)))
 
 (defalias 'markdown-toc/generate-toc 'markdown-toc-generate-toc)
 

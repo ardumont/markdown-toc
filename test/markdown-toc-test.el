@@ -110,10 +110,11 @@ NB-LINES-FORWARD is the number of lines to get back to."
   (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Table of Contents**
 
-- [-](#-)
-    - [Marmalade (recommended)](#marmalade-recommended)
-    - [Melpa-stable](#melpa-stable)
-    - [Melpa (~snapshot)](#melpa-snapshot)
+- [something](#something)
+    - [Sources](#sources)
+        - [Marmalade (recommended)](#marmalade-recommended)
+        - [Melpa-stable](#melpa-stable)
+        - [Melpa (~snapshot)](#melpa-snapshot)
     - [Install](#install)
         - [Load org-trello](#load-org-trello)
         - [Alternative](#alternative)
@@ -122,6 +123,7 @@ NB-LINES-FORWARD is the number of lines to get back to."
 
 <!-- markdown-toc end -->
 To install **org-trello** in your emacs, you need a few steps.
+# something
 ## Sources
 If not already configured, you need to prepare emacs to work with marmalade or melpa.
 For this, you need to install a snippet of code in your emacs configuration file.
@@ -136,6 +138,7 @@ For this, you need to install a snippet of code in your emacs configuration file
 "
                  (markdown-toc-with-temp-buffer-and-return-buffer-content
                   "To install **org-trello** in your emacs, you need a few steps.
+# something
 ## Sources
 If not already configured, you need to prepare emacs to work with marmalade or melpa.
 For this, you need to install a snippet of code in your emacs configuration file.
@@ -149,6 +152,53 @@ For this, you need to install a snippet of code in your emacs configuration file
 #### Tar
 "
                   (markdown-toc-generate-toc)))))
+
+(ert-deftest markdown-toc-generate-toc--first-toc-with-user-override ()
+  (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
+**Table of Contents**
+
+    - [Sources](#sources)
+        - [Marmalade (recommended)](#marmalade-recommended)
+        - [Melpa-stable](#melpa-stable)
+        - [Melpa (~snapshot)](#melpa-snapshot)
+    - [Install](#install)
+        - [Load org-trello](#load-org-trello)
+        - [Alternative](#alternative)
+            - [Git](#git)
+            - [Tar](#tar)
+
+<!-- markdown-toc end -->
+To install **org-trello** in your emacs, you need a few steps.
+# something
+## Sources
+If not already configured, you need to prepare emacs to work with marmalade or melpa.
+For this, you need to install a snippet of code in your emacs configuration file.
+### Marmalade (recommended)
+### Melpa-stable
+### Melpa (~snapshot)
+## Install
+### Load org-trello
+### Alternative
+#### Git
+#### Tar
+"
+                 (let ((markdown-toc-user-toc-structure-manipulation-fn 'cdr))
+                   (markdown-toc-with-temp-buffer-and-return-buffer-content
+                    "To install **org-trello** in your emacs, you need a few steps.
+# something
+## Sources
+If not already configured, you need to prepare emacs to work with marmalade or melpa.
+For this, you need to install a snippet of code in your emacs configuration file.
+### Marmalade (recommended)
+### Melpa-stable
+### Melpa (~snapshot)
+## Install
+### Load org-trello
+### Alternative
+#### Git
+#### Tar
+"
+                    (markdown-toc-generate-toc))))))
 
 (ert-deftest markdown-toc-generate-toc--replace-old-toc ()
   (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
@@ -266,6 +316,43 @@ For this, you need to install a snippet of code in your emacs configuration file
 #### Tar
 "
                   (markdown-toc-generate-toc 'replace-old-toc)))))
+
+;; (ert-deftest markdown-toc-generate-toc--ignore-sharp-line-in-gfm-code-blocks ()
+;;   (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
+;; **Table of Contents**
+
+;; - [Heading](#heading)
+;;     - [subheading](#subheading)
+;;     - [another subheading](#another-subheading)
+
+;; <!-- markdown-toc end -->
+;; # Heading
+
+;; ## subheading
+
+;; ```
+;; foo
+;; # bar
+;; baz
+;; ```
+
+;; ## another subheading
+;; "
+
+;;                  (markdown-toc-with-temp-buffer-and-return-buffer-content
+;;                   "# Heading
+
+;; ## subheading
+
+;; ```
+;; foo
+;; # bar
+;; baz
+;; ```
+
+;; ## another subheading
+;; "
+;;                   (markdown-toc-generate-toc)))))
 
 (provide 'markdown-toc-tests)
 ;;; markdown-toc-tests.el ends here
