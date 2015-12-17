@@ -150,7 +150,8 @@ Return the end position if it exists, nil otherwise."
           toc
           markdown-toc--header-toc-end))
 
-(defcustom markdown-toc-user-toc-structure-manipulation-fn (lambda (toc-structure) toc-structure)
+(defcustom markdown-toc-user-toc-structure-manipulation-fn
+  (lambda (toc-structure) toc-structure)
   "User crafted function to manipulate toc-structure as user sees fit.
 
 The toc-structure has the following form:
@@ -172,7 +173,8 @@ The toc-structure has the following form:
 
 If the user wanted to remove the first element, it could for
 example define the following function:
-(custom-set-variables '(markdown-toc-user-toc-structure-manipulation-fn 'cdr))
+  (custom-set-variables
+    '(markdown-toc-user-toc-structure-manipulation-fn 'cdr))
 
 Default to identity function (do nothing).")
 
