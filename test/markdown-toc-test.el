@@ -200,7 +200,7 @@ For this, you need to install a snippet of code in your emacs configuration file
 "
                     (markdown-toc-generate-toc))))))
 
-(ert-deftest markdown-toc-generate-toc--replace-old-toc ()
+(ert-deftest markdown-toc-generate-toc--replace-old-toc-if-already-present ()
   (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Table of Contents**
 
