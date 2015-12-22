@@ -90,8 +90,8 @@
 (defun markdown-toc--symbol (sym n)
   "Compute the repetition of a symbol SYM N times as a string."
   (--> n
-    (-repeat it sym)
-    (s-join "" it)))
+       (-repeat it sym)
+       (s-join "" it)))
 
 (defun markdown-toc--to-link (title)
   "Given a TITLE, return the markdown link associated."
