@@ -1,6 +1,12 @@
  #+title: dev backlog
 #+author: ardumont
 
+* IN-PROGRESS 0.0.9 [80%]
+- [X] Permit user-custom function to manipulate toc some more - #16
+- [X] Improve testing
+- [X] Clean some code
+- [X] Update version
+- [ ] Don't assume h1 on markdown file - #15
 * DONE 0.0.8 [100%]
 CLOSED: [2015-07-15 Wed 17:12]
 - [X] Add test coverage
