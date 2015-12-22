@@ -200,14 +200,15 @@ For this, you need to install a snippet of code in your emacs configuration file
 "
                     (markdown-toc-generate-toc))))))
 
-(ert-deftest markdown-toc-generate-toc--replace-old-toc ()
+(ert-deftest markdown-toc-generate-toc--replace-old-toc-if-already-present ()
   (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Table of Contents**
 
-- [-](#-)
-    - [Marmalade (recommended)](#marmalade-recommended)
-    - [Melpa-stable](#melpa-stable)
-    - [Melpa (~snapshot)](#melpa-snapshot)
+- [Packages](#packages)
+    - [Sources](#sources)
+        - [Marmalade (recommended)](#marmalade-recommended)
+        - [Melpa-stable](#melpa-stable)
+        - [Melpa (~snapshot)](#melpa-snapshot)
     - [Install](#install)
         - [Load org-trello](#load-org-trello)
         - [Alternative](#alternative)
@@ -216,6 +217,7 @@ For this, you need to install a snippet of code in your emacs configuration file
 
 <!-- markdown-toc end -->
 To install **org-trello** in your emacs, you need a few steps.
+# Packages
 ## Sources
 If not already configured, you need to prepare emacs to work with marmalade or melpa.
 For this, you need to install a snippet of code in your emacs configuration file.
@@ -232,7 +234,6 @@ For this, you need to install a snippet of code in your emacs configuration file
                   "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Table of Contents**
 
-- [-](#-)
     - [Melpa (~snapshot)](#melpa-snapshot)
     - [Install](#install)
         - [Load org-trello](#load-org-trello)
@@ -242,6 +243,7 @@ For this, you need to install a snippet of code in your emacs configuration file
 
 <!-- markdown-toc end -->
 To install **org-trello** in your emacs, you need a few steps.
+# Packages
 ## Sources
 If not already configured, you need to prepare emacs to work with marmalade or melpa.
 For this, you need to install a snippet of code in your emacs configuration file.
@@ -263,10 +265,11 @@ For this, you need to install a snippet of code in your emacs configuration file
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Table of Contents**
 
-- [-](#-)
-    - [Marmalade (recommended)](#marmalade-recommended)
-    - [Melpa-stable](#melpa-stable)
-    - [Melpa (~snapshot)](#melpa-snapshot)
+- [Packages](#packages)
+    - [Sources](#sources)
+        - [Marmalade (recommended)](#marmalade-recommended)
+        - [Melpa-stable](#melpa-stable)
+        - [Melpa (~snapshot)](#melpa-snapshot)
     - [Install](#install)
         - [Load org-trello](#load-org-trello)
         - [Alternative](#alternative)
@@ -275,6 +278,7 @@ For this, you need to install a snippet of code in your emacs configuration file
 
 <!-- markdown-toc end -->
 To install **org-trello** in your emacs, you need a few steps.
+# Packages
 ## Sources
 If not already configured, you need to prepare emacs to work with marmalade or melpa.
 For this, you need to install a snippet of code in your emacs configuration file.
@@ -293,7 +297,6 @@ For this, you need to install a snippet of code in your emacs configuration file
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Table of Contents**
 
-- [-](#-)
     - [Melpa (~snapshot)](#melpa-snapshot)
     - [Install](#install)
         - [Load org-trello](#load-org-trello)
@@ -303,6 +306,7 @@ For this, you need to install a snippet of code in your emacs configuration file
 
 <!-- markdown-toc end -->
 To install **org-trello** in your emacs, you need a few steps.
+# Packages
 ## Sources
 If not already configured, you need to prepare emacs to work with marmalade or melpa.
 For this, you need to install a snippet of code in your emacs configuration file.
@@ -316,43 +320,6 @@ For this, you need to install a snippet of code in your emacs configuration file
 #### Tar
 "
                   (markdown-toc-generate-toc 'replace-old-toc)))))
-
-;; (ert-deftest markdown-toc-generate-toc--ignore-sharp-line-in-gfm-code-blocks ()
-;;   (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
-;; **Table of Contents**
-
-;; - [Heading](#heading)
-;;     - [subheading](#subheading)
-;;     - [another subheading](#another-subheading)
-
-;; <!-- markdown-toc end -->
-;; # Heading
-
-;; ## subheading
-
-;; ```
-;; foo
-;; # bar
-;; baz
-;; ```
-
-;; ## another subheading
-;; "
-
-;;                  (markdown-toc-with-temp-buffer-and-return-buffer-content
-;;                   "# Heading
-
-;; ## subheading
-
-;; ```
-;; foo
-;; # bar
-;; baz
-;; ```
-
-;; ## another subheading
-;; "
-;;                   (markdown-toc-generate-toc)))))
 
 (provide 'markdown-toc-tests)
 ;;; markdown-toc-tests.el ends here
