@@ -72,16 +72,48 @@
 
 (defalias 'markdown-toc/version 'markdown-toc-version)
 
+(defvar markdown-toc-markdown-mode-empty-heading "-")  ;; from markdown-mode's code
+(defvar markdown-toc-markdown-mode-self-heading ".")   ;; from markdown-mode's code
+
+(setq markdown-toc-tryout '(("-"
+                             ("." ("Sources" . 64))
+                             ("Marmalade (recommended)" . 243)
+                             ("Melpa-stable" . 271)
+                             ("Melpa (~snapshot)" . 288)
+                             ("Install"
+                              ("." . 310)
+                              ("Load org-trello" . 321)
+                              ("Alternative" . 400)))))
+
+(defun trace (label e)
+  (message "%s: %s" label e)
+  e)
+
+(defun markdown-toc--car-and-cdr (menu-index level)
+  "Compute car and cdr on MENU-INDEX.
+
+There is a singularity in index computation on markdown when no h1 is provided."
+  (let* ((fst (car menu-index)))
+    (if (equal fst markdown-toc-markdown-mode-empty-heading)
+        (let ((fst-1 (caar
+                      (assoc-default markdown-toc-markdown-mode-self-heading menu-index)))
+              (tail (-filter (lambda (e)
+                               (or (stringp e)
+                                   (and (listp e) (not (equal "." (car e))))))
+                             menu-index)))
+          (list fst-1 (+ level 1) (cdr tail)))
+      (let* ((tail  (trace "cdr" (cdr menu-index)))
+             (ttail (if (integerp tail) nil (cdr tail))))
+        (list fst level ttail)))))
+
 (defun markdown-toc--compute-toc-structure-from-level (level menu-index)
   "Given a LEVEL and a MENU-INDEX, compute the toc structure."
   (when menu-index
-    (let* ((fst   (car menu-index))
-           (tail  (cdr menu-index))
-           (ttail (if (integerp tail) nil (cdr tail))))
+    (-let (((fst level tail) (markdown-toc--car-and-cdr menu-index level)))
       (cons `(,level . ,fst)
             (--mapcat
              (markdown-toc--compute-toc-structure-from-level (+ 1 level) it)
-             ttail)))))
+             tail)))))
 
 (defun markdown-toc--compute-toc-structure (imenu-index)
   "Given a IMENU-INDEX, compute the TOC structure."

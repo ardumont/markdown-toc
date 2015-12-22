@@ -57,6 +57,25 @@
                   0
                   '("some markdown page title" . 1)))))
 
+(ert-deftest markdown-toc--compute-toc-structure-from-level-strange-ones ()
+  (should (equal '((1 . "Sources")
+                   (2 . "Marmalade (recommended)")
+                   (2 . "Melpa-stable")
+                   (2 . "Melpa (~snapshot)")
+                   (2 . "Install")
+                   (3 . "Load org-trello")
+                   (3 . "Alternative"))
+                 (markdown-toc--compute-toc-structure-from-level
+                  0
+                  '(("-"
+                     ("." ("Sources" . 64))
+                     ("Marmalade (recommended)" . 243)
+                     ("Melpa-stable" . 271)
+                     ("Melpa (~snapshot)" . 288)
+                     ("Install" ("." . 310)
+                      ("Load org-trello" . 321)
+                      ("Alternative" . 400))))))))
+
 (ert-deftest markdown-toc--compute-toc-structure ()
   (should (equal
            '((0 . "some markdown page title")
@@ -263,10 +282,10 @@ For this, you need to install a snippet of code in your emacs configuration file
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Table of Contents**
 
-- [-](#-)
-    - [Marmalade (recommended)](#marmalade-recommended)
-    - [Melpa-stable](#melpa-stable)
-    - [Melpa (~snapshot)](#melpa-snapshot)
+    - [Sources](#sources)
+        - [Marmalade (recommended)](#marmalade-recommended)
+        - [Melpa-stable](#melpa-stable)
+        - [Melpa (~snapshot)](#melpa-snapshot)
     - [Install](#install)
         - [Load org-trello](#load-org-trello)
         - [Alternative](#alternative)
