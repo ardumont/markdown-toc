@@ -1,6 +1,14 @@
  #+title: dev backlog
 #+author: ardumont
 
+* DONE 0.0.9 [100%]
+CLOSED: [2015-12-23 Wed 11:59]
+- [X] Permit user-custom function to manipulate toc some more - #16
+- [X] Improve testing
+- [X] Clean some code
+- [X] Update version
+- [X] Clean up tests
+- [X] Release notes
 * DONE 0.0.8 [100%]
 CLOSED: [2015-07-15 Wed 17:12]
 - [X] Add test coverage
