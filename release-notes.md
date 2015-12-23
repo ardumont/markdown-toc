@@ -1,3 +1,11 @@
+# 0.0.9
+
+- [X] Permit user-custom function to manipulate toc some more - #16
+- [X] Improve testing
+- [X] Clean some code
+- [X] Update version
+- [X] Clean up tests
+
 # 0.0.8
 
 - [X] Add test coverage
