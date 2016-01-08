@@ -64,6 +64,10 @@
 
 (defconst markdown--toc-version "0.0.9" "Current version installed.")
 
+(defgroup markdown-toc nil
+  "A simple TOC generator for markdown file."
+  :group 'markdown)
+
 ;;;###autoload
 (defun markdown-toc-version ()
   "Markdown-toc version."
@@ -176,7 +180,8 @@ example define the following function:
   (custom-set-variables
     '(markdown-toc-user-toc-structure-manipulation-fn 'cdr))
 
-Default to identity function (do nothing).")
+Default to identity function (do nothing)."
+  :group 'markdown-toc)
 
 ;;;###autoload
 
