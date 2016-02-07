@@ -70,21 +70,21 @@ the toc. The remaining code expects a similar structure.
 Example:
 
 ``` lisp
-'((0 . \"some markdown page title\")
-  (0 . \"main title\")
-  (1 . \"Sources\")
-  (2 . \"Marmalade (recommended)\")
-  (2 . \"Melpa-stable\")
-  (2 . \"Melpa (~snapshot)\")
-  (1 . \"Install\")
-  (2 . \"Load org-trello\")
-  (2 . \"Alternative\")
-  (3 . \"Git\")
-  (3 . \"Tar\")
-  (0 . \"another title\")
-  (1 . \"with\")
-  (1 . \"some\")
-  (1 . \"heading\"))
+'((0 . "some markdown page title")
+  (0 . "main title")
+  (1 . "Sources")
+  (2 . "Marmalade (recommended)")
+  (2 . "Melpa-stable")
+  (2 . "Melpa (~snapshot)")
+  (1 . "Install")
+  (2 . "Load org-trello")
+  (2 . "Alternative")
+  (3 . "Git")
+  (3 . "Tar")
+  (0 . "another title")
+  (1 . "with")
+  (1 . "some")
+  (1 . "heading"))
 ```
 
 So for example, as asked in #16, one could drop the first element:
