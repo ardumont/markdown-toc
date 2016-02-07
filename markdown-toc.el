@@ -198,7 +198,7 @@ If called interactively with prefix arg REPLACE-TOC-P, replaces previous TOC."
         (delete-region region-start (1+ region-end))
         (when replace-toc-p
           (goto-char region-start))))
-    (->> (markdown-imenu-create-index)
+    (->> (markdown-imenu-create-nested-index)
          markdown-toc--compute-toc-structure
          (funcall markdown-toc-user-toc-structure-manipulation-fn)
          markdown-toc--generate-toc
