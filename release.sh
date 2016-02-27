@@ -22,7 +22,7 @@ git checkout master
 
 git merge origin/master
 
-git tag $VERSION
+git tag -a -s $VERSION
 
 git push origin --tag
 

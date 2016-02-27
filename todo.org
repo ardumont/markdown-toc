@@ -1,6 +1,14 @@
  #+title: dev backlog
 #+author: ardumont
 
+* DONE 0.1.0 [100%]
+CLOSED: [2016-02-27 Sat 11:16]
+- [X] Update dependencies (markdown-mode)
+- [X] Update version
+- [X] Add template for issues
+- [X] Add markdown-toc-bug-report command
+- [X] Release notes
+
 * DONE 0.0.9 [100%]
 CLOSED: [2015-12-23 Wed 11:59]
 - [X] Permit user-custom function to manipulate toc some more - #16

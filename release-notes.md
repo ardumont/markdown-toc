@@ -1,3 +1,11 @@
+# 0.1.0
+
+- [X] Update dependencies (markdown-mode)
+- [X] Update version
+- [X] Add template for issues
+- [X] Add markdown-toc-bug-report command
+- [X] Release notes
+
 # 0.0.9
 
 - [X] Permit user-custom function to manipulate toc some more - #16
