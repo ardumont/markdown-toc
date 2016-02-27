@@ -1,12 +1,13 @@
  #+title: dev backlog
 #+author: ardumont
 
-* IN-PROGRESS 0.1.0 [80%]
+* DONE 0.1.0 [100%]
+CLOSED: [2016-02-27 Sat 11:16]
 - [X] Update dependencies (markdown-mode)
 - [X] Update version
 - [X] Add template for issues
 - [X] Add markdown-toc-bug-report command
-- [ ] Release notes
+- [X] Release notes
 
 * DONE 0.0.9 [100%]
 CLOSED: [2015-12-23 Wed 11:59]
