@@ -2,6 +2,7 @@
 (require 'el-mock)
 (require 'markdown-toc)
 (require 'mocker)
+(require 'cl)
 
 (ert-deftest markdown-toc--symbol ()
   (should (equal "   "       (markdown-toc--symbol " " 3)))
