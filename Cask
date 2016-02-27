@@ -8,4 +8,5 @@
  (depends-on "ert-runner")
  (depends-on "ert")
  (depends-on "ert-expectations")
- (depends-on "el-mock"))
+ (depends-on "el-mock")
+ (depends-on "mocker"))

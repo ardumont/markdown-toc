@@ -68,6 +68,10 @@
   "A simple TOC generator for markdown file."
   :group 'markdown)
 
+(defun markdown-toc-log-msg (args)
+  "Log message ARGS."
+  (apply #'message (format "markdown-toc - %s" (car args)) (cdr args)))
+
 ;;;###autoload
 (defun markdown-toc-version ()
   "Markdown-toc version."
@@ -205,6 +209,30 @@ If called interactively with prefix arg REPLACE-TOC-P, replaces previous TOC."
          insert)))
 
 (defalias 'markdown-toc/generate-toc 'markdown-toc-generate-toc)
+
+(defun markdown-toc--bug-report ()
+  "Compute the bug report for the user to include."
+  (->> `("Please:"
+         "- Describe your problem with clarity and conciceness (cf. https://www.gnu.org/software/emacs/manual/html_node/emacs/Understanding-Bug-Reporting.html)"
+         "- Explicit your installation choice (melpa, marmalade, el-get, tarball, git clone...)."
+         "- Report the following message trace inside your issue."
+         ""
+         "System information:"
+         ,(format "- system-type: %s" system-type)
+         ,(format "- locale-coding-system: %s" locale-coding-system)
+         ,(format "- emacs-version: %s" (emacs-version))
+         ,(format "- markdown-toc version: %s" markdown-toc--toc-version)
+         ,(format "- markdown-toc path: %s" (find-library-name "markdown-toc")))
+       (s-join "\n")))
+
+(defun markdown-toc-bug-report (&optional open-url)
+  "Display a bug report message.
+When OPEN-URL is filled, with universal argument (`C-u') is used,
+opens new issue in markdown-toc's github tracker."
+  (interactive "P")
+  (when open-url
+    (browse-url "https://github.com/ardumont/markdown-toc/issues/new"))
+  (markdown-toc-log-msg (list (markdown-toc--bug-report))))
 
 (provide 'markdown-toc)
 ;;; markdown-toc.el ends here
