@@ -1,11 +1,11 @@
 ;;; markdown-toc.el --- A simple TOC generator for markdown file
-;; Copyright (C) 2014 Antoine R. Dumont
+;; Copyright (C) 2014-2016 Antoine R. Dumont
 
 ;; Author: Antoine R. Dumont
 ;; Maintainer: Antoine R. Dumont
 ;; URL: http://github.com/ardumont/markdown-toc
 ;; Created: 24th May 2014
-;; Version: 0.0.9
+;; Version: 0.1.0
 ;; Keywords: markdown, toc, tools,
 ;; Package-Requires: ((markdown-mode "2.1") (dash "2.11.0") (s "1.9.0"))
 
@@ -62,7 +62,7 @@
 (require 'dash)
 (require 'markdown-mode)
 
-(defconst markdown--toc-version "0.0.9" "Current version installed.")
+(defconst markdown-toc--toc-version "0.1.0" "Current version installed.")
 
 (defgroup markdown-toc nil
   "A simple TOC generator for markdown file."
@@ -72,7 +72,7 @@
 (defun markdown-toc-version ()
   "Markdown-toc version."
   (interactive)
-  (message "markdown-toc version: %s" markdown--toc-version))
+  (message "markdown-toc version: %s" markdown-toc--toc-version))
 
 (defalias 'markdown-toc/version 'markdown-toc-version)
 

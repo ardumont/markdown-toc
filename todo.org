@@ -1,11 +1,11 @@
  #+title: dev backlog
 #+author: ardumont
 
-* IN-PROGRESS 0.1.0 [20%]
+* IN-PROGRESS 0.1.0 [40%]
 - [X] Update dependencies (markdown-mode)
-- [ ] Add markdown-toc-bug-report command
+- [X] Update version
 - [ ] Add template for issues
-- [ ] Update version
+- [ ] Add markdown-toc-bug-report command
 - [ ] Release notes
 
 * DONE 0.0.9 [100%]
