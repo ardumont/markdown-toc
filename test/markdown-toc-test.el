@@ -1,7 +1,7 @@
 (require 'ert)
 (require 'el-mock)
 (require 'markdown-toc)
-(require 'mocker)
+(require 'cl)
 
 (ert-deftest markdown-toc--symbol ()
   (should (equal "   "       (markdown-toc--symbol " " 3)))
@@ -325,9 +325,8 @@ For this, you need to install a snippet of code in your emacs configuration file
 
 (ert-deftest test-markdown-toc-log-msg ()
   (should (string= "markdown-toc - hello dude"
-                   (mocker-let ((message (str &rest args)
-                                         ((:input '("markdown-toc - hello %s" "dude") :output "markdown-toc - hello dude"))))
-                     (markdown-toc-log-msg '("hello %s" "dude"))))))
+                   (with-mock (mock (message "markdown-toc - hello %s" "dude") => "markdown-toc - hello dude")
+                              (markdown-toc-log-msg '("hello %s" "dude"))))))
 
 (ert-deftest test-markdown-toc--bug-report ()
   (should (string=
@@ -346,28 +345,20 @@ System information:
                  (locale-coding-system "locale-coding-system")
                  (markdown-toc--toc-version "markdown-toc-version")
                  (request-backend "curl"))
-             (mocker-let ((emacs-version ()
-                                         ((:input nil :output "emacs-version")))
-                          (find-library-name (lib)
-                                             ((:input '("markdown-toc") :output "/path/to/markdown-toc"))))
-               (markdown-toc--bug-report))))))
+             (with-mock (mock (emacs-version) => "emacs-version")
+                        (mock  (find-library-name "markdown-toc") => "/path/to/markdown-toc")
+                        (markdown-toc--bug-report))))))
 
 (ert-deftest test-markdown-toc-bug-report ()
   (should (equal :res
-                 (mocker-let ((browse-url (url)
-                                          ((:input '("https://github.com/ardumont/markdown-toc/issues/new")
-                                                   :output :opened)))
-                              (markdown-toc--bug-report ()
-                                                        ((:input nil :output :message)))
-                              (markdown-toc-log-msg (args)
-                                                    ((:input '((:message)) :output :res))))
-                   (markdown-toc-bug-report 'browse))))
+                 (with-mock (mock (browse-url "https://github.com/ardumont/markdown-toc/issues/new") => :opened)
+                            (mock (markdown-toc--bug-report) => :message)
+                            (mock (markdown-toc-log-msg '(:message)) => :res)
+                            (markdown-toc-bug-report 'browse))))
   (should (equal :res2
-                 (mocker-let ((markdown-toc--bug-report ()
-                                                        ((:input nil :output :message2)))
-                              (markdown-toc-log-msg (args)
-                                                    ((:input '((:message2)) :output :res2))))
-                   (markdown-toc-bug-report)))))
+                 (with-mock (mock (markdown-toc--bug-report) => :message2)
+                            (mock (markdown-toc-log-msg '(:message2)) => :res2)
+                            (markdown-toc-bug-report)))))
 
 (provide 'markdown-toc-tests)
 ;;; markdown-toc-tests.el ends here
