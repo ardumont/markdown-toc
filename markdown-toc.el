@@ -106,7 +106,7 @@
   (format "[%s](#%s)" title
           (->> title
                downcase
-               (replace-regexp-in-string "[^a-z0-9 -]" "")
+               (replace-regexp-in-string "[[:punct:]]" "")
                (s-replace " " "-"))))
 
 (defun markdown-toc--to-markdown-toc (level-title-toc-list)
