@@ -1,10 +1,10 @@
  #+title: dev backlog
 #+author: ardumont
 
-* TODO 0.1.1 [66%]
+* TODO 0.1.1 [100%]
 - [X] Update version
 - [X] Fix the problem when generating TOC for document with UTF-8 characters - Closes #24
-- [ ] Release notes
+- [X] Release notes
 * DONE 0.1.0 [100%]
 CLOSED: [2016-02-27 Sat 11:16]
 - [X] Update dependencies (markdown-mode)
