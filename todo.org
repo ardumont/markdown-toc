@@ -1,7 +1,8 @@
  #+title: dev backlog
 #+author: ardumont
 
-* TODO 0.1.1 [100%]
+* DONE 0.1.1 [100%]
+CLOSED: [2016-07-20 Wed 11:40]
 - [X] Update version
 - [X] Fix the problem when generating TOC for document with UTF-8 characters - Closes #24
 - [X] Release notes
