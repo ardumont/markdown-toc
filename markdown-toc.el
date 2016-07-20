@@ -5,7 +5,7 @@
 ;; Maintainer: Antoine R. Dumont
 ;; URL: http://github.com/ardumont/markdown-toc
 ;; Created: 24th May 2014
-;; Version: 0.1.0
+;; Version: 0.1.1
 ;; Keywords: markdown, toc, tools,
 ;; Package-Requires: ((markdown-mode "2.1") (dash "2.11.0") (s "1.9.0"))
 
@@ -62,7 +62,7 @@
 (require 'dash)
 (require 'markdown-mode)
 
-(defconst markdown-toc--toc-version "0.1.0" "Current version installed.")
+(defconst markdown-toc--toc-version "0.1.1" "Current version installed.")
 
 (defgroup markdown-toc nil
   "A simple TOC generator for markdown file."
@@ -101,12 +101,18 @@
        (-repeat it sym)
        (s-join "" it)))
 
+(defconst markdown-toc--protection-symbol "09876543214b825dc642cb6eb9a060e54bf8d69288fbee49041234567890"
+  "Implementation detail to protect some punctuation characters
+  when converting to link.")
+
 (defun markdown-toc--to-link (title)
   "Given a TITLE, return the markdown link associated."
   (format "[%s](#%s)" title
           (->> title
                downcase
-               (replace-regexp-in-string "[^a-z0-9 -]" "")
+               (replace-regexp-in-string "-" markdown-toc--protection-symbol)
+               (replace-regexp-in-string "[[:punct:]]" "")
+               (replace-regexp-in-string markdown-toc--protection-symbol "-")
                (s-replace " " "-"))))
 
 (defun markdown-toc--to-markdown-toc (level-title-toc-list)
