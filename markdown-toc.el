@@ -124,19 +124,27 @@
                         (markdown-toc--to-link title))))
        (s-join "\n")))
 
-(defconst markdown-toc--header-toc-start
-  "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->")
-(defconst markdown-toc--header-toc-title
-  "**Table of Contents**")
-(defconst markdown-toc--header-toc-end
-  "<!-- markdown-toc end -->")
+(defcustom markdown-toc-header-toc-start
+  "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->"
+  "Beginning delimiter comment."
+  :group 'markdown-toc)
+
+(defcustom markdown-toc-header-toc-title
+  "**Table of Contents**"
+  "Title comment on TOC header."
+  :group 'mardown-toc)
+
+(defcustom markdown-toc-header-toc-end
+  "<!-- markdown-toc end -->"
+  "Ending delimiter comment."
+  :group 'mardown-toc)
 
 (defun markdown-toc--toc-already-present-p ()
   "Determine if a TOC has already been generated.
 Return the end position if it exists, nil otherwise."
   (save-excursion
     (goto-char (point-min))
-    (re-search-forward markdown-toc--header-toc-start nil t)))
+    (re-search-forward markdown-toc-header-toc-start nil t)))
 
 (defun markdown-toc--toc-start ()
   "Compute the toc's starting point."
@@ -148,7 +156,7 @@ Return the end position if it exists, nil otherwise."
   "Compute the toc's end point."
   (save-excursion
     (goto-char (point-min))
-    (re-search-forward markdown-toc--header-toc-end nil t)))
+    (re-search-forward markdown-toc-header-toc-end nil t)))
 
 (defun markdown-toc--generate-toc (toc-structure)
   "Given a TOC-STRUCTURE, compute a new toc."
@@ -159,10 +167,10 @@ Return the end position if it exists, nil otherwise."
 (defun markdown-toc--compute-full-toc (toc)
   "Given the TOC's content, compute the full toc with comments and title."
   (format "%s\n%s\n\n%s\n\n%s\n"
-          markdown-toc--header-toc-start
-          markdown-toc--header-toc-title
+          markdown-toc-header-toc-start
+          markdown-toc-header-toc-title
           toc
-          markdown-toc--header-toc-end))
+          markdown-toc-header-toc-end))
 
 (defcustom markdown-toc-user-toc-structure-manipulation-fn
   (lambda (toc-structure) toc-structure)

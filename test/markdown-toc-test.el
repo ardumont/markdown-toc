@@ -158,6 +158,28 @@ For this, you need to install a snippet of code in your emacs configuration file
 "
                   (markdown-toc-generate-toc)))))
 
+(ert-deftest markdown-toc-generate-toc--with-customs ()
+  (should (equal "<!-- markdown-toc start -->
+** foobar **
+
+- [something](#something)
+    - [Sources](#sources)
+
+<!-- markdown-toc end -->
+blahblah.
+# something
+## Sources
+"
+                 (let ((markdown-toc-header-toc-start "<!-- markdown-toc start -->")
+                       (markdown-toc-header-toc-title "** foobar **")
+                       (markdown-toc-header-toc-end "<!-- markdown-toc end -->"))
+                   (markdown-toc-with-temp-buffer-and-return-buffer-content
+                    "blahblah.
+# something
+## Sources
+"
+                    (markdown-toc-generate-toc))))))
+
 (ert-deftest markdown-toc-generate-toc--first-toc-with-user-override ()
   (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Table of Contents**
