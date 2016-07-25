@@ -1,10 +1,10 @@
  #+title: dev backlog
 #+author: ardumont
 
-* IN-PROGRESS 0.1.2 [66%]
+* IN-PROGRESS 0.1.2 [100%]
 - [X] Make markdown-toc-header-toc-* customizable - Closes #26
 - [X] Update version
-- [ ] Release notes
+- [X] Release notes
 
 * DONE 0.1.1 [100%]
 CLOSED: [2016-07-20 Wed 11:40]
