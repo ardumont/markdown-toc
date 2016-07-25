@@ -1,3 +1,15 @@
+# 0.1.2
+
+- [X] Make markdown-toc-header-toc-* customizable - Closes #26
+- [X] Update version
+- [X] Release notes
+
+# 0.1.1
+
+- [X] Update version
+- [X] Fix the problem when generating TOC for document with UTF-8 characters - Closes #24
+- [X] Release notes
+
 # 0.1.0
 
 - [X] Update dependencies (markdown-mode)
