@@ -117,6 +117,23 @@ To create another updated TOC elsewhere, execute again <kbd>M-x
 markdown-toc-generate-toc</kbd>, this will remove the old TOC and
 insert the updated one from where you stand.
 
+## Customize
+
+Currently, you can customize three variable:
+
+* `markdown-toc-header-toc-start`
+* `markdown-toc-header-toc-title`
+* `markdown-toc-header-toc-end`
+
+Customize them as following format:
+
+``` lisp
+(custom-set-variables
+ '(markdown-toc-header-toc-start "<!-- customized start-->")
+ '(markdown-toc-header-toc-title "**customized title**")
+ '(markdown-toc-header-toc-end "<!-- customized end -->"))
+```
+
 # Install
 
 ## emacs package repository
