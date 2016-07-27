@@ -132,12 +132,12 @@
 (defcustom markdown-toc-header-toc-title
   "**Table of Contents**"
   "Title comment on TOC header."
-  :group 'mardown-toc)
+  :group 'markdown-toc)
 
 (defcustom markdown-toc-header-toc-end
   "<!-- markdown-toc end -->"
   "Ending delimiter comment."
-  :group 'mardown-toc)
+  :group 'markdown-toc)
 
 (defun markdown-toc--toc-already-present-p ()
   "Determine if a TOC has already been generated.
