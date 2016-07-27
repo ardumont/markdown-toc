@@ -119,7 +119,7 @@ insert the updated one from where you stand.
 
 ## Customize
 
-Currently, you can customize three variable:
+Currently, you can customize three variables:
 
 * `markdown-toc-header-toc-start`
 * `markdown-toc-header-toc-title`
