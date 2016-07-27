@@ -8,8 +8,10 @@ markdown-toc
 
 - [Use](#use)
     - [Create](#create)
+    - [User toc manipulation](#user-toc-manipulation)
     - [Update](#update)
     - [Create elsewhere](#create-elsewhere)
+    - [Customize](#customize)
 - [Install](#install)
     - [emacs package repository](#emacs-package-repository)
         - [Setup](#setup)
