@@ -120,9 +120,17 @@
   (->> level-title-toc-list
        (--map (let ((nb-spaces (* 4 (car it)))
                     (title     (cdr it)))
-                (format "%s- %s" (markdown-toc--symbol " " nb-spaces)
+                (format "%s%s %s"
+                        (markdown-toc--symbol " " nb-spaces)
+                        markdown-toc-list-item-marker
                         (markdown-toc--to-link title))))
        (s-join "\n")))
+
+(defcustom markdown-toc-list-item-marker
+  "-"
+  "List item marker that should be used.
+Example: '-' for unordered lists or '1.' for ordered lists."
+  :group 'markdown-toc)
 
 (defcustom markdown-toc-header-toc-start
   "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->"
