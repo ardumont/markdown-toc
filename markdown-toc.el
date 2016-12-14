@@ -130,6 +130,9 @@
   "-"
   "List item marker that should be used.
 Example: '-' for unordered lists or '1.' for ordered lists."
+  :type '(choice
+          (string :tag "Unordered list header" "-")
+          (string :tag "Ordered list header" "1."))
   :group 'markdown-toc)
 
 (defcustom markdown-toc-header-toc-start
