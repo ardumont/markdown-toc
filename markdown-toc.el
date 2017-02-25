@@ -1,5 +1,5 @@
 ;;; markdown-toc.el --- A simple TOC generator for markdown file
-;; Copyright (C) 2014-2016 Antoine R. Dumont
+;; Copyright (C) 2014-2017 Antoine R. Dumont
 
 ;; Author: Antoine R. Dumont
 ;; Maintainer: Antoine R. Dumont
