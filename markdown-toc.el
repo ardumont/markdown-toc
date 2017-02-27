@@ -285,6 +285,7 @@ If called interactively with prefix arg REPLACE-TOC-P, replaces previous TOC."
          ,(format "- system-type: %s" system-type)
          ,(format "- locale-coding-system: %s" locale-coding-system)
          ,(format "- emacs-version: %s" (emacs-version))
+         ,(format "- markdown-mode path: %s" (find-library-name "markdown-mode"))
          ,(format "- markdown-toc version: %s" markdown-toc--toc-version)
          ,(format "- markdown-toc path: %s" (find-library-name "markdown-toc")))
        (s-join "\n")))

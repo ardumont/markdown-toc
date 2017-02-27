@@ -683,6 +683,7 @@ System information:
 - system-type: system-type
 - locale-coding-system: locale-coding-system
 - emacs-version: emacs-version
+- markdown-mode path: /path/to/markdown-mode
 - markdown-toc version: markdown-toc-version
 - markdown-toc path: /path/to/markdown-toc"
            (let ((system-type "system-type")
@@ -692,7 +693,8 @@ System information:
              (mocker-let ((emacs-version ()
                                          ((:input nil :output "emacs-version")))
                           (find-library-name (lib)
-                                             ((:input '("markdown-toc") :output "/path/to/markdown-toc"))))
+                                             ((:input '("markdown-mode") :output "/path/to/markdown-mode")
+                                              (:input '("markdown-toc") :output "/path/to/markdown-toc"))))
                (markdown-toc--bug-report))))))
 
 (ert-deftest test-markdown-toc-bug-report ()
