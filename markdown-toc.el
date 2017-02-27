@@ -246,7 +246,7 @@ If called interactively with prefix arg REPLACE-TOC-P, replaces previous TOC."
     (when (markdown-toc--toc-already-present-p)
       ;; when toc already present, remove it
       (markdown-toc--delete-toc t))
-    (->> (markdown-imenu-create-nested-index)
+    (->> (funcall imenu-create-index-function)
          markdown-toc--compute-toc-structure
          (funcall markdown-toc-user-toc-structure-manipulation-fn)
          markdown-toc--generate-toc
