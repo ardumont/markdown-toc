@@ -91,7 +91,7 @@
 
 (ert-deftest markdown-toc--compute-full-toc ()
   (should (equal
-           "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->\n**Table of Contents**\n\nsome-toc\n\n<!-- markdown-toc end -->\n"
+           "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->\n**Table of Contents**\n\nsome-toc\n\n<!-- markdown-toc end -->\n"
            (markdown-toc--compute-full-toc "some-toc"))))
 
 (defmacro markdown-toc-with-temp-buffer-and-return-buffer-content (text body-test)
@@ -109,7 +109,7 @@ NB-LINES-FORWARD is the number of lines to get back to."
 
 ;; Create a new TOC
 (ert-deftest markdown-toc-generate-toc--first-toc ()
-  (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
+  (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
 - [something](#something)
@@ -181,7 +181,7 @@ blahblah.
                     (markdown-toc-generate-toc))))))
 
 (ert-deftest markdown-toc-generate-toc--first-toc-with-user-override ()
-  (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
+  (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
     - [Sources](#sources)
@@ -228,7 +228,7 @@ For this, you need to install a snippet of code in your emacs configuration file
                     (markdown-toc-generate-toc))))))
 
 (ert-deftest markdown-toc-generate-toc--replace-old-toc-if-already-present ()
-  (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
+  (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
 - [Packages](#packages)
@@ -258,7 +258,7 @@ For this, you need to install a snippet of code in your emacs configuration file
 #### Tar
 "
                  (markdown-toc-with-temp-buffer-and-return-buffer-content
-                  "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
+                  "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
     - [Melpa (~snapshot)](#melpa-snapshot)
@@ -289,7 +289,7 @@ For this, you need to install a snippet of code in your emacs configuration file
   ;; Update an existing TOC
   (should (equal "some foo bar before
 
-<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
 - [Packages](#packages)
@@ -321,7 +321,7 @@ For this, you need to install a snippet of code in your emacs configuration file
                  (markdown-toc-with-temp-buffer-and-return-buffer-content
                   "some foo bar before
 
-<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
     - [Melpa (~snapshot)](#melpa-snapshot)
@@ -348,6 +348,258 @@ For this, you need to install a snippet of code in your emacs configuration file
 "
                   (markdown-toc-generate-toc 'replace-old-toc)))))
 
+(ert-deftest test-markdown-toc-generate-or-refresh-toc--with-existing-toc ()
+  ;; Update an existing TOC
+  (should (equal "some foo bar before
+
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [Packages](#packages)
+    - [Sources](#sources)
+        - [Marmalade (recommended)](#marmalade-recommended)
+        - [Melpa-stable](#melpa-stable)
+        - [Melpa (~snapshot)](#melpa-snapshot)
+    - [Install](#install)
+        - [Load org-trello](#load-org-trello)
+        - [Alternative](#alternative)
+            - [Git](#git)
+            - [Tar](#tar)
+
+<!-- markdown-toc end -->
+To install **org-trello** in your emacs, you need a few steps.
+# Packages
+## Sources
+If not already configured, you need to prepare emacs to work with marmalade or melpa.
+For this, you need to install a snippet of code in your emacs configuration file.
+### Marmalade (recommended)
+### Melpa-stable
+### Melpa (~snapshot)
+## Install
+### Load org-trello
+### Alternative
+#### Git
+#### Tar
+"
+                 (markdown-toc-with-temp-buffer-and-return-buffer-content
+                  "some foo bar before
+
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+    - [Melpa (~snapshot)](#melpa-snapshot)
+    - [Install](#install)
+        - [Load org-trello](#load-org-trello)
+        - [Alternative](#alternative)
+            - [Git](#git)
+            - [Tar](#tar)
+
+<!-- markdown-toc end -->
+To install **org-trello** in your emacs, you need a few steps.
+# Packages
+## Sources
+If not already configured, you need to prepare emacs to work with marmalade or melpa.
+For this, you need to install a snippet of code in your emacs configuration file.
+### Marmalade (recommended)
+### Melpa-stable
+### Melpa (~snapshot)
+## Install
+### Load org-trello
+### Alternative
+#### Git
+#### Tar
+"
+                  (markdown-toc-generate-or-refresh-toc)))))
+
+(ert-deftest test-markdown-toc-generate-or-refresh-toc--without-existing-toc ()
+  (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [something](#something)
+    - [Sources](#sources)
+        - [Marmalade (recommended)](#marmalade-recommended)
+        - [Melpa-stable](#melpa-stable)
+        - [Melpa (~snapshot)](#melpa-snapshot)
+        - [[配置 SPF Sender Policy Framework 记录]](#配置-spf-sender-policy-framework-记录)
+    - [Install](#install)
+        - [Load org-trello](#load-org-trello)
+        - [Alternative](#alternative)
+            - [Git](#git)
+            - [Tar](#tar)
+
+<!-- markdown-toc end -->
+To install **org-trello** in your emacs, you need a few steps.
+# something
+## Sources
+If not already configured, you need to prepare emacs to work with marmalade or melpa.
+For this, you need to install a snippet of code in your emacs configuration file.
+### Marmalade (recommended)
+### Melpa-stable
+### Melpa (~snapshot)
+### [配置 SPF Sender Policy Framework 记录]
+## Install
+### Load org-trello
+### Alternative
+#### Git
+#### Tar
+"
+                 (markdown-toc-with-temp-buffer-and-return-buffer-content
+                  "To install **org-trello** in your emacs, you need a few steps.
+# something
+## Sources
+If not already configured, you need to prepare emacs to work with marmalade or melpa.
+For this, you need to install a snippet of code in your emacs configuration file.
+### Marmalade (recommended)
+### Melpa-stable
+### Melpa (~snapshot)
+### [配置 SPF Sender Policy Framework 记录]
+## Install
+### Load org-trello
+### Alternative
+#### Git
+#### Tar
+"
+                  (markdown-toc-generate-or-refresh-toc)))))
+
+(ert-deftest test-markdown-toc--refresh-toc--with-existing-toc ()
+  ;; Update an existing TOC
+  (should (equal "some foo bar before
+
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [Packages](#packages)
+    - [Sources](#sources)
+        - [Marmalade (recommended)](#marmalade-recommended)
+        - [Melpa-stable](#melpa-stable)
+        - [Melpa (~snapshot)](#melpa-snapshot)
+    - [Install](#install)
+        - [Load org-trello](#load-org-trello)
+        - [Alternative](#alternative)
+            - [Git](#git)
+            - [Tar](#tar)
+
+<!-- markdown-toc end -->
+To install **org-trello** in your emacs, you need a few steps.
+# Packages
+## Sources
+If not already configured, you need to prepare emacs to work with marmalade or melpa.
+For this, you need to install a snippet of code in your emacs configuration file.
+### Marmalade (recommended)
+### Melpa-stable
+### Melpa (~snapshot)
+## Install
+### Load org-trello
+### Alternative
+#### Git
+#### Tar
+"
+                 (markdown-toc-with-temp-buffer-and-return-buffer-content
+                  "some foo bar before
+
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+    - [Melpa (~snapshot)](#melpa-snapshot)
+    - [Install](#install)
+        - [Load org-trello](#load-org-trello)
+        - [Alternative](#alternative)
+            - [Git](#git)
+            - [Tar](#tar)
+
+<!-- markdown-toc end -->
+To install **org-trello** in your emacs, you need a few steps.
+# Packages
+## Sources
+If not already configured, you need to prepare emacs to work with marmalade or melpa.
+For this, you need to install a snippet of code in your emacs configuration file.
+### Marmalade (recommended)
+### Melpa-stable
+### Melpa (~snapshot)
+## Install
+### Load org-trello
+### Alternative
+#### Git
+#### Tar
+"
+                  (markdown-toc-refresh-toc)))))
+
+(ert-deftest test-markdown-toc-refresh-toc--without-existing-toc ()
+  (should (equal "To install **org-trello** in your emacs, you need a few steps.
+# something
+## Sources
+If not already configured, you need to prepare emacs to work with marmalade or melpa.
+For this, you need to install a snippet of code in your emacs configuration file.
+### Marmalade (recommended)
+### Melpa-stable
+### Melpa (~snapshot)
+### [配置 SPF Sender Policy Framework 记录]
+## Install
+### Load org-trello
+### Alternative
+#### Git
+#### Tar
+"
+                 (markdown-toc-with-temp-buffer-and-return-buffer-content
+                  "To install **org-trello** in your emacs, you need a few steps.
+# something
+## Sources
+If not already configured, you need to prepare emacs to work with marmalade or melpa.
+For this, you need to install a snippet of code in your emacs configuration file.
+### Marmalade (recommended)
+### Melpa-stable
+### Melpa (~snapshot)
+### [配置 SPF Sender Policy Framework 记录]
+## Install
+### Load org-trello
+### Alternative
+#### Git
+#### Tar
+"
+                  (markdown-toc-refresh-toc)))))
+
+(ert-deftest test-markdown-toc-delete-toc ()
+  (should (equal "To install **org-trello** in your emacs, you need a few steps.
+# Packages
+## Sources
+If not already configured, you need to prepare emacs to work with marmalade or melpa.
+For this, you need to install a snippet of code in your emacs configuration file.
+### Marmalade (recommended)
+### Melpa-stable
+### Melpa (~snapshot)
+## Install
+### Load org-trello
+### Alternative
+#### Git
+#### Tar
+"
+                 (markdown-toc-with-temp-buffer-and-return-buffer-content
+                   "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+    - [Melpa (~snapshot)](#melpa-snapshot)
+    - [Install](#install)
+        - [Load org-trello](#load-org-trello)
+        - [Alternative](#alternative)
+            - [Git](#git)
+            - [Tar](#tar)
+
+<!-- markdown-toc end -->
+To install **org-trello** in your emacs, you need a few steps.
+# Packages
+## Sources
+If not already configured, you need to prepare emacs to work with marmalade or melpa.
+For this, you need to install a snippet of code in your emacs configuration file.
+### Marmalade (recommended)
+### Melpa-stable
+### Melpa (~snapshot)
+## Install
+### Load org-trello
+### Alternative
+#### Git
+#### Tar
+"
+                  (markdown-toc-delete-toc)))))
 
 (ert-deftest test-markdown-toc-log-msg ()
   (should (string= "markdown-toc - hello dude"

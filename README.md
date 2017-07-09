@@ -3,7 +3,7 @@ markdown-toc
 
 [![Build Status](https://travis-ci.org/ardumont/markdown-toc.png?branch=master)](https://travis-ci.org/ardumont/markdown-toc) [![Coverage Status](https://coveralls.io/repos/ardumont/markdown-toc/badge.svg?branch=master&service=github)](https://coveralls.io/github/ardumont/markdown-toc?branch=master) [![MELPA Stable](http://stable.melpa.org/packages/markdown-toc-badge.svg)](http://stable.melpa.org/#/markdown-toc) [![MELPA](http://melpa.org/packages/markdown-toc-badge.svg)](http://melpa.org/#/markdown-toc)
 
-<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
 - [Use](#use)
@@ -11,6 +11,7 @@ markdown-toc
     - [User toc manipulation](#user-toc-manipulation)
     - [Update](#update)
     - [Create elsewhere](#create-elsewhere)
+    - [Remove](#remove)
     - [Customize](#customize)
 - [Install](#install)
     - [emacs package repository](#emacs-package-repository)
@@ -40,10 +41,13 @@ Inside a markdown file, the first time, place yourself where you want to insert 
 
 This will compute the TOC and insert it at current position.
 
+You can also execute: <kbd>M-x markdown-toc-generate-or-refres-toc</kbd> to either
+gnerate a TOC when none exists or refresh the currently existing one.
+
 Here is one possible output:
 
 ```markdown
-<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
 - [Use](#use)
@@ -108,16 +112,20 @@ Or drop all h1 titles... or whatever:
 
 ## Update
 
-To update the existing TOC, simply execute again:
-<kbd>C-u M-x markdown-toc-generate-toc</kbd>
+To update the existing TOC, simply execute:
+<kbd>M-x markdown-toc-refresh-toc</kbd>
 
 This will update the current TOC.
 
 ## Create elsewhere
 
-To create another updated TOC elsewhere, execute again <kbd>M-x
-markdown-toc-generate-toc</kbd>, this will remove the old TOC and
+To create another updated TOC elsewhere, execute <kbd>M-x
+markdown-toc-generate-toc</kbd> again, this will remove the old TOC and
 insert the updated one from where you stand.
+
+## Remove
+
+To remove a TOC, execute <kbd>M-x markdown-toc-delete-toc</kbd>.
 
 ## Customize
 
