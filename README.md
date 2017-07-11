@@ -41,7 +41,7 @@ Inside a markdown file, the first time, place yourself where you want to insert 
 
 This will compute the TOC and insert it at current position.
 
-You can also execute: <kbd>M-x markdown-toc-generate-or-refres-toc</kbd> to either
+You can also execute: <kbd>M-x markdown-toc-generate-or-refresh-toc</kbd> to either
 gnerate a TOC when none exists or refresh the currently existing one.
 
 Here is one possible output:

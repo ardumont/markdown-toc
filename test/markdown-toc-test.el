@@ -4,13 +4,19 @@
 (require 'mocker)
 (require 'cl)
 
+(ert-deftest test-markdown-toc-version ()
+  (let ((markdown-toc--toc-version "0.1.2"))
+    (should (equal "markdown-toc version: 0.1.2" (markdown-toc-version)))))
+
 (ert-deftest markdown-toc--symbol ()
   (should (equal "   "       (markdown-toc--symbol " " 3)))
   (should (equal "-#--#--#-" (markdown-toc--symbol "-#-" 3))))
 
 (ert-deftest markdown-toc--to-link ()
+  (should (equal "[some markdown page~title (foo).](#some-markdown-pagetitle-foo-1)"
+            (markdown-toc--to-link "some markdown page~title (foo)." 1)))
   (should (equal "[some markdown page~title (foo).](#some-markdown-pagetitle-foo)"
-                 (markdown-toc--to-link "some markdown page~title (foo)."))))
+                 (markdown-toc--to-link "some markdown page~title (foo)." 0))))
 
 (ert-deftest markdown-toc--to-markdown-toc ()
   (should (equal "- [some markdown page title](#some-markdown-page-title)
@@ -142,6 +148,65 @@ For this, you need to install a snippet of code in your emacs configuration file
 "
                  (markdown-toc-with-temp-buffer-and-return-buffer-content
                   "To install **org-trello** in your emacs, you need a few steps.
+# something
+## Sources
+If not already configured, you need to prepare emacs to work with marmalade or melpa.
+For this, you need to install a snippet of code in your emacs configuration file.
+### Marmalade (recommended)
+### Melpa-stable
+### Melpa (~snapshot)
+### [配置 SPF Sender Policy Framework 记录]
+## Install
+### Load org-trello
+### Alternative
+#### Git
+#### Tar
+"
+                  (markdown-toc-generate-toc)))))
+
+(ert-deftest markdown-toc-generate-toc--with-duplicate-titles ()
+  (should (equal "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [something](#something)
+- [something](#something-1)
+- [something](#something-2)
+- [something](#something-3)
+    - [Sources](#sources)
+        - [Marmalade (recommended)](#marmalade-recommended)
+        - [Melpa-stable](#melpa-stable)
+        - [Melpa (~snapshot)](#melpa-snapshot)
+        - [[配置 SPF Sender Policy Framework 记录]](#配置-spf-sender-policy-framework-记录)
+    - [Install](#install)
+        - [Load org-trello](#load-org-trello)
+        - [Alternative](#alternative)
+            - [Git](#git)
+            - [Tar](#tar)
+
+<!-- markdown-toc end -->
+To install **org-trello** in your emacs, you need a few steps.
+# something
+# something
+# something
+# something
+## Sources
+If not already configured, you need to prepare emacs to work with marmalade or melpa.
+For this, you need to install a snippet of code in your emacs configuration file.
+### Marmalade (recommended)
+### Melpa-stable
+### Melpa (~snapshot)
+### [配置 SPF Sender Policy Framework 记录]
+## Install
+### Load org-trello
+### Alternative
+#### Git
+#### Tar
+"
+                 (markdown-toc-with-temp-buffer-and-return-buffer-content
+                  "To install **org-trello** in your emacs, you need a few steps.
+# something
+# something
+# something
 # something
 ## Sources
 If not already configured, you need to prepare emacs to work with marmalade or melpa.

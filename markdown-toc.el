@@ -105,25 +105,41 @@
   "Implementation detail to protect some punctuation characters
   when converting to link.")
 
-(defun markdown-toc--to-link (title)
+(defun markdown-toc--to-link (title count)
   "Given a TITLE, return the markdown link associated."
-  (format "[%s](#%s)" title
+  (format "[%s](#%s%s)" title
           (->> title
                downcase
                (replace-regexp-in-string "-" markdown-toc--protection-symbol)
                (replace-regexp-in-string "[[:punct:]]" "")
                (replace-regexp-in-string markdown-toc--protection-symbol "-")
-               (s-replace " " "-"))))
+               (s-replace " " "-"))
+          (if (> count 0)
+            (concat "-" (number-to-string count))
+            "")))
+
+(defun markdown--count-duplicate-titles (toc-structure)
+  "Counts the number of times each title appeared in the toc structure and adds
+it to the TOC structure."
+  (-map-indexed (lambda (index n)
+          (let* ((indent (car n))
+                (title (cdr n))
+                (count (--count (string= title (cdr it))
+                         (-take (+ index 1) toc-structure))))
+            (list indent title (- count 1))))
+    toc-structure))
 
 (defun markdown-toc--to-markdown-toc (level-title-toc-list)
   "Given LEVEL-TITLE-TOC-LIST, a list of pair level, title, return a TOC string."
   (->> level-title-toc-list
+       markdown--count-duplicate-titles
        (--map (let ((nb-spaces (* 4 (car it)))
-                    (title     (cdr it)))
+                    (title     (car (cdr it)))
+                    (count     (car (cdr (cdr it)))))
                 (format "%s%s %s"
                         (markdown-toc--symbol " " nb-spaces)
                         markdown-toc-list-item-marker
-                        (markdown-toc--to-link title))))
+                        (markdown-toc--to-link title count))))
        (s-join "\n")))
 
 (defcustom markdown-toc-list-item-marker
