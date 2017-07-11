@@ -4,6 +4,10 @@
 (require 'mocker)
 (require 'cl)
 
+(ert-deftest test-markdown-toc-version ()
+  (let ((markdown-toc--toc-version "0.1.2"))
+    (should (equal "markdown-toc version: 0.1.2" (markdown-toc-version)))))
+
 (ert-deftest markdown-toc--symbol ()
   (should (equal "   "       (markdown-toc--symbol " " 3)))
   (should (equal "-#--#--#-" (markdown-toc--symbol "-#-" 3))))
