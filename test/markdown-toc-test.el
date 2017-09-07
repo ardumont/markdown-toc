@@ -100,6 +100,12 @@
            "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->\n**Table of Contents**\n\nsome-toc\n\n<!-- markdown-toc end -->\n"
            (markdown-toc--compute-full-toc "some-toc"))))
 
+(ert-deftest markdown-toc--compute-full-toc-blank-title ()
+  (let ((markdown-toc-header-toc-title ""))
+    (should (equal
+             "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->\n\nsome-toc\n\n<!-- markdown-toc end -->\n"
+             (markdown-toc--compute-full-toc "some-toc")))))
+
 (defmacro markdown-toc-with-temp-buffer-and-return-buffer-content (text body-test)
   "A `markdown-toc' test macro to ease testing.
 TEXT is the content of the buffer.

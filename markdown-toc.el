@@ -201,9 +201,11 @@ Return the end position if it exists, nil otherwise."
 
 (defun markdown-toc--compute-full-toc (toc)
   "Given the TOC's content, compute the full toc with comments and title."
-  (format "%s\n%s\n\n%s\n\n%s\n"
+  (format "%s\n%s\n%s\n\n%s\n"
           markdown-toc-header-toc-start
-          markdown-toc-header-toc-title
+          (if (s-blank? markdown-toc-header-toc-title)
+              ""
+            (s-append "\n" markdown-toc-header-toc-title))
           toc
           markdown-toc-header-toc-end))
 
