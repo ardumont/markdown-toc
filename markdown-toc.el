@@ -1,8 +1,8 @@
 ;;; markdown-toc.el --- A simple TOC generator for markdown file
-;; Copyright (C) 2014-2017 Antoine R. Dumont
+;; Copyright (C) 2014-2020 Antoine R. Dumont (@ardumont)
 
-;; Author: Antoine R. Dumont
-;; Maintainer: Antoine R. Dumont
+;; Author: Antoine R. Dumont (@ardumont)
+;; Maintainer: Antoine R. Dumont (@ardumont)
 ;; URL: http://github.com/ardumont/markdown-toc
 ;; Created: 24th May 2014
 ;; Version: 0.1.2
@@ -101,22 +101,31 @@
        (-repeat it sym)
        (s-join "" it)))
 
-(defconst markdown-toc--protection-symbol "09876543214b825dc642cb6eb9a060e54bf8d69288fbee49041234567890"
-  "Implementation detail to protect some punctuation characters
+(defconst markdown-toc--dash-protection-symbol "09876543214b825dc642cb6eb9a060e54bf8d69288fbee49041234567890"
+  "Implementation detail to protect the - characters
   when converting to link.")
 
-(defun markdown-toc--to-link (title count)
+(defconst markdown-toc--underscore-protection-symbol "afec96cafb7bc4b0e216bfe86db4bd6c4aab44bca19dd9999b11e162f595d711"
+  "Implementation detail to protect the `_` characters
+  when converting to link.")
+
+(defun markdown-toc--to-link (title &optional count)
   "Given a TITLE, return the markdown link associated."
-  (format "[%s](#%s%s)" title
-          (->> title
-               downcase
-               (replace-regexp-in-string "-" markdown-toc--protection-symbol)
-               (replace-regexp-in-string "[[:punct:]]" "")
-               (replace-regexp-in-string markdown-toc--protection-symbol "-")
-               (s-replace " " "-"))
-          (if (> count 0)
-            (concat "-" (number-to-string count))
-            "")))
+
+  (let ((count (if count count 0)))
+    (format "[%s](#%s%s)" title
+            (->> title
+                 s-trim
+                 downcase
+                 (s-replace "-" markdown-toc--dash-protection-symbol)
+                 (s-replace "_" markdown-toc--underscore-protection-symbol)
+                 (s-replace-regexp "[[:punct:]]" "")
+                 (s-replace markdown-toc--dash-protection-symbol "-")
+                 (s-replace markdown-toc--underscore-protection-symbol "_")
+                 (s-replace " " "-"))
+            (if (> count 0)
+                (concat "-" (number-to-string count))
+              ""))))
 
 (defun markdown--count-duplicate-titles (toc-structure)
   "Counts the number of times each title appeared in the toc structure and adds

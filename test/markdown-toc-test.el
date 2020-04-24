@@ -14,9 +14,11 @@
 
 (ert-deftest markdown-toc--to-link ()
   (should (equal "[some markdown page~title (foo).](#some-markdown-pagetitle-foo-1)"
-            (markdown-toc--to-link "some markdown page~title (foo)." 1)))
+                 (markdown-toc--to-link "some markdown page~title (foo)." 1)))
   (should (equal "[some markdown page~title (foo).](#some-markdown-pagetitle-foo)"
-                 (markdown-toc--to-link "some markdown page~title (foo)." 0))))
+                 (markdown-toc--to-link "some markdown page~title (foo)." 0)))
+  (should (equal "[ under_score](#under_score)"
+                 (markdown-toc--to-link " under_score"))))
 
 (ert-deftest markdown-toc--to-markdown-toc ()
   (should (equal "- [some markdown page title](#some-markdown-page-title)
