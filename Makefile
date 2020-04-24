@@ -3,6 +3,8 @@ VERSION=$$(grep "^;; Version: " $(MODE_NAME).el | cut -f3 -d' ')
 PACKAGE_FOLDER=$(MODE_NAME)-$(VERSION)
 ARCHIVE=$(PACKAGE_FOLDER).tar
 EMACS=emacs
+CASK ?= cask
+LANG=en_US.UTF-8
 
 .PHONY: clean
 
@@ -10,39 +12,39 @@ pr:
 	hub pull-request -b ardumont:master
 
 build:
-	cask build
+	${CASK} build
 
 clean-dist:
 	rm -rf dist/
 
 clean: clean-dist
 	rm -rf *.tar
-	cask clean-elc
+	${CASK} clean-elc
 
 install:
-	cask install
+	${CASK} install
 
 test-init:
-	cask exec ert-runner init
+	${CASK} exec ert-runner init
 
 test: clean
-	cask exec ert-runner
+	${CASK} exec ert-runner
 
 pkg-file:
-	cask pkg-file
+	${CASK} pkg-file
 
 pkg-el: pkg-file
-	cask package
+	${CASK} package
 
 package: clean pkg-el
 	cp dist/$(ARCHIVE) .
 	make clean-dist
 
 info:
-	cask info
+	${CASK} info
 
 release:
 	./release.sh $(VERSION)
 
-install-cask:
-	curl -fsSkL https://raw.github.com/cask/cask/master/go | python
+version:
+	@echo "application $(PACKAGE): $(VERSION)\npackage: $(ARCHIVE)"
