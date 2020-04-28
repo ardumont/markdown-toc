@@ -1,3 +1,11 @@
+# 0.1.3
+
+- [X] Update ci tools
+- [X] Update tools using pinned nix-shell
+- [X] Take back control on the old 0.1.3 branch
+- [X] Deal properly with heading containing `_` - Closes #43
+- [X] markdown-imenu-create-nested-index function definition is void - Closes #29
+
 # 0.1.2
 
 - [X] Make markdown-toc-header-toc-* customizable - Closes #26
