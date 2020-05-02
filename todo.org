@@ -1,5 +1,10 @@
- #+title: dev backlog
+#+title: backlog/release-notes
 #+author: ardumont
+
+* DONE 0.1.4 [100%]
+  CLOSED: [2020-05-02 Sat 09:30]
+
+- [x] Replace back s-replace-regexp to replace-regexp-in-string
 
 * DONE 0.1.3 [100%]
   CLOSED: [2020-04-28 Tue 18:47]
