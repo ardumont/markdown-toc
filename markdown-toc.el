@@ -119,7 +119,7 @@
                  downcase
                  (s-replace "-" markdown-toc--dash-protection-symbol)
                  (s-replace "_" markdown-toc--underscore-protection-symbol)
-                 (s-replace-regexp "[[:punct:]]" "")
+                 (replace-regexp-in-string "[[:punct:]]" "")
                  (s-replace markdown-toc--dash-protection-symbol "-")
                  (s-replace markdown-toc--underscore-protection-symbol "_")
                  (s-replace " " "-"))
