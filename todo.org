@@ -1,6 +1,10 @@
 #+title: backlog/release-notes
 #+author: ardumont
 
+* IN-PROGRESS 0.1.5 [100%]
+- [ ] Make a markdown-toc minor mode
+- [X] Follow link in toc: M-x markdown-toc-follow-toc-link-at-point
+- [X] Allow user space indentation customization
 * DONE 0.1.4 [100%]
   CLOSED: [2020-05-02 Sat 09:30]
 
