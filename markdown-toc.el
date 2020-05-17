@@ -318,11 +318,11 @@ or if not on a toc link, this does nothing.
   (interactive)
   (let* ((full-title (buffer-substring-no-properties (point-at-bol) (point-at-eol)))
          (level (markdown-toc--title-level full-title)))
-    (when level ;; nil if misindented or not on a title
-      (let ((title (markdown-toc--read-title-out-of-link full-title)))
-        (goto-char (point-min))
-        (search-forward-regexp (format "%s %s" (s-repeat level "#") title))))
-    (message "markdown-toc: Not on a link (or misindented), nothing to do")))
+    (if level ;; nil if misindented or not on a title
+        (let ((title (markdown-toc--read-title-out-of-link full-title)))
+          (goto-char (point-min))
+          (search-forward-regexp (format "%s %s" (s-repeat level "#") title)))
+      (message "markdown-toc: Not on a link (or misindented), nothing to do"))))
 
 (defun markdown-toc--bug-report ()
   "Compute the bug report for the user to include."
