@@ -129,11 +129,12 @@ To remove a TOC, execute <kbd>M-x markdown-toc-delete-toc</kbd>.
 
 ## Customize
 
-Currently, you can customize three variables:
+Currently, you can customize the following:
 
 * `markdown-toc-header-toc-start`
 * `markdown-toc-header-toc-title`
 * `markdown-toc-header-toc-end`
+*  markdown-toc-indentation-space
 
 Customize them as following format:
 
@@ -141,7 +142,8 @@ Customize them as following format:
 (custom-set-variables
  '(markdown-toc-header-toc-start "<!-- customized start-->")
  '(markdown-toc-header-toc-title "**customized title**")
- '(markdown-toc-header-toc-end "<!-- customized end -->"))
+ '(markdown-toc-header-toc-end "<!-- customized end -->")
+ '(markdown-toc-indentation-space 4))
 ```
 
 # Install

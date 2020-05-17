@@ -142,7 +142,7 @@ it to the TOC structure."
   "Given LEVEL-TITLE-TOC-LIST, a list of pair level, title, return a TOC string."
   (->> level-title-toc-list
        markdown--count-duplicate-titles
-       (--map (let ((nb-spaces (* 4 (car it)))
+       (--map (let ((nb-spaces (* markdown-toc-indentation-space (car it)))
                     (title     (car (cdr it)))
                     (count     (car (cdr (cdr it)))))
                 (format "%s%s %s"
@@ -215,6 +215,9 @@ Return the end position if it exists, nil otherwise."
           markdown-toc-header-toc-title
           toc
           markdown-toc-header-toc-end))
+
+(defcustom markdown-toc-indentation-space 4
+  "Let the user decide the indentation level")
 
 (defcustom markdown-toc-user-toc-structure-manipulation-fn
   (lambda (toc-structure) toc-structure)
