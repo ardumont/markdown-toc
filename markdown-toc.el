@@ -217,7 +217,7 @@ Return the end position if it exists, nil otherwise."
           markdown-toc-header-toc-end))
 
 (defcustom markdown-toc-indentation-space 4
-  "Let the user decide the indentation level")
+  "Let the user decide the indentation level.")
 
 (defcustom markdown-toc-user-toc-structure-manipulation-fn
   (lambda (toc-structure) toc-structure)
@@ -264,6 +264,8 @@ If called interactively with prefix arg REPLACE-TOC-P, replaces previous TOC."
          markdown-toc--generate-toc
          insert)))
 
+(defalias 'markdown-toc/generate-toc 'markdown-toc-generate-toc)
+
 ;;;###autoload
 (defun markdown-toc-generate-or-refresh-toc ()
   "Generate a TOC for markdown file at current point or refreshes an already generated TOC."
@@ -284,7 +286,43 @@ If called interactively with prefix arg REPLACE-TOC-P, replaces previous TOC."
   (save-excursion
     (markdown-toc--delete-toc t)))
 
-(defalias 'markdown-toc/generate-toc 'markdown-toc-generate-toc)
+(defun markdown-toc--read-title-out-of-link (link)
+  "Extract the link title out of a markdown LINK title.
+This assumes no funky stuff in the markdown link format ` - [<title>](...) `  "
+  (->> link
+       s-trim
+       (s-chop-prefix "- [")
+       (s-split "]")
+       car))
+
+(defun markdown-toc--title-level (link)
+  "Determine the markdown title LINK out of its indentation.
+If misindented or not prefixed by `-`, it's considered not a link
+and returns nil. Otherwise, returns the level number."
+  (when (s-prefix? "-" (-> link s-trim)) ;; if not, it's not a link title
+    (let ((indent (->> link
+                       (s-split "-")
+                       car  ;; first string contains a string with empty spaces
+                       ;; which should be a multiple of
+                       ;; `markdown-toc-indentation-space`
+                       length)))
+      (when (zerop (% indent markdown-toc-indentation-space))
+        (+ 1 (/ indent markdown-toc-indentation-space))))))
+
+;;;###autoload
+(defun markdown-toc-follow-link-at-point ()
+  "On a given toc link, navigate to the current markdown header.
+If the toc is misindented (according to markdown-toc-indentation-space`)
+or if not on a toc link, this does nothing.
+"
+  (interactive)
+  (let* ((full-title (buffer-substring-no-properties (point-at-bol) (point-at-eol)))
+         (level (markdown-toc--title-level full-title)))
+    (when level ;; nil if misindented or not on a title
+      (let ((title (markdown-toc--read-title-out-of-link full-title)))
+        (goto-char (point-min))
+        (search-forward-regexp (format "%s %s" (s-repeat level "#") title))))
+    (message "markdown-toc: Not on a link (or misindented), nothing to do")))
 
 (defun markdown-toc--bug-report ()
   "Compute the bug report for the user to include."

@@ -716,5 +716,90 @@ System information:
                                                     ((:input '((:message2)) :output :res2))))
                    (markdown-toc-bug-report)))))
 
+(ert-deftest markdown-toc--read-title-out-of-link ()
+  (should (string= "this is the title"
+                   (markdown-toc--read-title-out-of-link "  - [this is the title](#this-is-the-link)   ")))
+  (should (string= "another title"
+                   (markdown-toc--read-title-out-of-link "  - [another title](#this-is-the-link)
+with multiple line
+should not matter "))))
+
+(ert-deftest markdown-toc--title-level ()
+  (should (eq 1
+              (markdown-toc--title-level "- [this is the title](#this-is-the-link)")))
+  (should (eq 4
+              (let ((markdown-toc-indentation-space 4))
+                (markdown-toc--title-level "            - [this is the title](#this-is-the-link)"))))
+  (should (eq 2
+              (let ((markdown-toc-indentation-space 2))
+                (markdown-toc--title-level "  - [another title](#this-is-the-link)
+with multiple line
+should not matter "))))
+  (should (eq 2
+              (let ((markdown-toc-indentation-space 3))
+                (markdown-toc--title-level "   - [another title](#this-is-the-link)
+with multiple line
+should not matter "))))
+  ;; no - as prefix so considered not a title
+  (should-not (markdown-toc--title-level "[this is the title](#this-is-the-link)"))
+  ;; prefixed with a dash but misaligned, title should be indented with a
+  ;; multiple of `markdown-toc-indentation-space` blank spaces
+  (should-not (markdown-toc--title-level " - [title](#this-is-the-link)")))
+
+(ert-deftest markdown-toc-follow-link-at-point()
+  "Follow a correct toc link should follow to the title"
+  (should (string= "## Sources"
+                   (with-temp-buffer
+                     (insert "- [some markdown page title](#some-markdown-page-title)
+- [main title](#main-title)
+    - [Sources](#sources)
+        - [Marmalade (recommended)](#marmalade-recommended)
+
+# main title
+## Sources
+### marmalade
+...
+")
+                     (search-backward "- [Sources]")
+                     (call-interactively 'markdown-toc-follow-link-at-point)
+                     (buffer-substring-no-properties (point-at-bol) (point-at-eol))))))
+
+(ert-deftest markdown-toc-follow-link-at-point-failures()
+  "Follow a misindented toc link should do nothing"
+  (should
+   ;; not move
+   (string= "   - [Sources](#sources)  <- misindented 3 instead of 4 here"
+            (with-temp-buffer
+              (insert "- [some markdown page title](#some-markdown-page-title)
+- [main title](#main-title)
+   - [Sources](#sources)  <- misindented 3 instead of 4 here
+
+# main title
+## Sources
+...
+")
+              (search-backward "- [Sources]")
+              (call-interactively 'markdown-toc-follow-link-at-point)
+              (buffer-substring-no-properties (point-at-bol) (point-at-eol)))))
+
+  (should
+   ;; not move as well because
+   (string= "not a title"
+            (with-temp-buffer
+              (insert "- [some markdown page title](#some-markdown-page-title)
+- [main title](#main-title)
+   - [Sources](#sources)
+        - [Marmalade (recommended)](#marmalade-recommended)
+
+# main title
+## Sources
+### marmalade
+not a title
+...
+")
+              (search-backward "not a title")
+              (call-interactively 'markdown-toc-follow-link-at-point)
+              (buffer-substring-no-properties (point-at-bol) (point-at-eol))))))
+
 (provide 'markdown-toc-tests)
 ;;; markdown-toc-tests.el ends here
