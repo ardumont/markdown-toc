@@ -349,5 +349,30 @@ opens new issue in markdown-toc's github tracker."
     (browse-url "https://github.com/ardumont/markdown-toc/issues/new"))
   (markdown-toc-log-msg (list (markdown-toc--bug-report))))
 
+(defvar markdown-toc-mode-map nil "Default Bindings map for markdown-toc mode.")
+
+(setq markdown-toc-mode-map
+      (let ((map (make-sparse-keymap)))
+        (define-key map (kbd "C-c m .") 'markdown-toc-follow-link-at-point)
+        (define-key map (kbd "C-c m t") 'markdown-toc-generate-or-refresh-toc)
+        (define-key map (kbd "C-c m d") 'markdown-toc-delete-toc)
+        (define-key map (kbd "C-c m v") 'markdown-toc-version)
+        map))
+
+;;;###autoload
+(define-minor-mode markdown-toc-mode
+  "Functionality for generating toc in markdown file.
+With no argument, the mode is toggled on/off.
+Non-nil argument turns mode on.
+Nil argument turns mode off.
+
+Commands:
+\\{markdown-toc-mode-map}"
+
+  :init-value nil
+  :lighter " mt"
+  :group 'markdown-toc
+  :keymap markdown-toc-mode-map)
+
 (provide 'markdown-toc)
 ;;; markdown-toc.el ends here

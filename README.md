@@ -6,7 +6,6 @@ markdown-toc
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
-- [markdown-toc](#markdown-toc)
 - [Use](#use)
     - [Create](#create)
     - [User toc manipulation](#user-toc-manipulation)
@@ -14,6 +13,7 @@ markdown-toc
     - [Create elsewhere](#create-elsewhere)
     - [Remove](#remove)
     - [Customize](#customize)
+    - [Minor mode](#minor-mode)
 - [Install](#install)
     - [emacs package repository](#emacs-package-repository)
         - [Setup](#setup)
@@ -143,6 +143,24 @@ Customize them as following format:
  '(markdown-toc-header-toc-end "<!-- customized end -->")
  '(markdown-toc-indentation-space 4))
 ```
+
+## Minor mode
+
+markdown-toc-mode provides a minor mode with the following default binding:
+
+```
+(setq markdown-toc-mode-map
+      (let ((map (make-sparse-keymap)))
+        (define-key map (kbd "C-c m .") 'markdown-toc-follow-link-at-point)
+        (define-key map (kbd "C-c m t") 'markdown-toc-generate-or-refresh-toc)
+        (define-key map (kbd "C-c m d") 'markdown-toc-delete-toc)
+        (define-key map (kbd "C-c m v") 'markdown-toc-version)
+        map))
+```
+
+To (de)activate this in an org file: /M-x markdown-toc-mode/
+
+You can also use emacs to setup your own bindings.
 
 # Install
 
