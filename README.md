@@ -6,6 +6,7 @@ markdown-toc
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
+- [markdown-toc](#markdown-toc)
 - [Use](#use)
     - [Create](#create)
     - [User toc manipulation](#user-toc-manipulation)
@@ -18,8 +19,7 @@ markdown-toc
         - [Setup](#setup)
             - [melpa stable](#melpa-stable)
             - [melpa](#melpa)
-            - [marmalade](#marmalade)
-        - [Install](#install)
+        - [Install](#install-1)
     - [emacs-lisp file](#emacs-lisp-file)
 - [Inspiration](#inspiration)
 
@@ -173,15 +173,6 @@ Then hit <kbd>M-x eval-buffer</kbd> to evaluate the buffer's contents.
 ```
 
 Then hit <kbd>M-x eval-buffer</kbd> to evaluate the buffer's contents.
-
-#### marmalade
-
-``` lisp
-(require 'package)
-(add-to-list 'package-archives '("marmalade" .
-                                 "http://marmalade-repo.org/packages/"))
-(package-initialize)
-```
 
 ### Install
 
