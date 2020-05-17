@@ -27,9 +27,7 @@ markdown-toc
 
 A simple mode to create TOC in a well-formed markdown file.
 
-Limitations:
-
-The TOC is well-formed if the markdown is. (cf. #15)
+Note that the TOC is well-formed if the markdown is (cf. #15).
 
 # Use
 
