@@ -163,17 +163,20 @@ Example: '-' for unordered lists or '1.' for ordered lists."
 (defcustom markdown-toc-header-toc-start
   "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->"
   "Beginning delimiter comment."
-  :group 'markdown-toc)
+  :group 'markdown-toc
+  :type 'string)
 
 (defcustom markdown-toc-header-toc-title
   "**Table of Contents**"
   "Title comment on TOC header."
-  :group 'markdown-toc)
+  :group 'markdown-toc
+  :type 'string)
 
 (defcustom markdown-toc-header-toc-end
   "<!-- markdown-toc end -->"
   "Ending delimiter comment."
-  :group 'markdown-toc)
+  :group 'markdown-toc
+  :type 'string)
 
 (defun markdown-toc--toc-already-present-p ()
   "Determine if a TOC has already been generated.
@@ -217,7 +220,9 @@ Return the end position if it exists, nil otherwise."
           markdown-toc-header-toc-end))
 
 (defcustom markdown-toc-indentation-space 4
-  "Let the user decide the indentation level.")
+  "Let the user decide the indentation level."
+  :group 'markdown-toc
+  :type 'integer)
 
 (defcustom markdown-toc-user-toc-structure-manipulation-fn
   (lambda (toc-structure) toc-structure)
@@ -246,7 +251,8 @@ example define the following function:
     '(markdown-toc-user-toc-structure-manipulation-fn 'cdr))
 
 Default to identity function (do nothing)."
-  :group 'markdown-toc)
+  :group 'markdown-toc
+  :type 'function)
 
 ;;;###autoload
 (defun markdown-toc-generate-toc (&optional replace-toc-p)
