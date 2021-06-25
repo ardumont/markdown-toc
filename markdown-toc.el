@@ -69,6 +69,68 @@
   "A simple TOC generator for markdown file."
   :group 'markdown)
 
+(defcustom markdown-toc-list-item-marker
+  "-"
+  "List item marker that should be used.
+Example: '-' for unordered lists or '1.' for ordered lists."
+  :type '(choice
+          (string :tag "Unordered list header" "-")
+          (string :tag "Ordered list header" "1."))
+  :group 'markdown-toc)
+
+(defcustom markdown-toc-header-toc-start
+  "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->"
+  "Beginning delimiter comment."
+  :group 'markdown-toc
+  :type 'string)
+
+(defcustom markdown-toc-header-toc-title
+  "**Table of Contents**"
+  "Title comment on TOC header."
+  :group 'markdown-toc
+  :type 'string)
+
+(defcustom markdown-toc-header-toc-end
+  "<!-- markdown-toc end -->"
+  "Ending delimiter comment."
+  :group 'markdown-toc
+  :type 'string)
+
+(defcustom markdown-toc-indentation-space 4
+  "Let the user decide the indentation level."
+  :group 'markdown-toc
+  :type 'integer)
+
+(defcustom markdown-toc-user-toc-structure-manipulation-fn
+  (lambda (toc-structure) toc-structure)
+  "User crafted function to manipulate toc-structure as user sees fit.
+
+The toc-structure has the following form:
+'((0 . \"some markdown page title\")
+  (0 . \"main title\")
+  (1 . \"Sources\")
+  (2 . \"Marmalade (recommended)\")
+  (2 . \"Melpa-stable\")
+  (2 . \"Melpa (~snapshot)\")
+  (1 . \"Install\")
+  (2 . \"Load org-trello\")
+  (2 . \"Alternative\")
+  (3 . \"Git\")
+  (3 . \"Tar\")
+  (0 . \"another title\")
+  (1 . \"with\")
+  (1 . \"some\")
+  (1 . \"heading\"))
+
+If the user wanted to remove the first element, it could for
+example define the following function:
+  (custom-set-variables
+    '(markdown-toc-user-toc-structure-manipulation-fn 'cdr))
+
+Default to identity function (do nothing)."
+  :group 'markdown-toc
+  :type 'function)
+
 (defun markdown-toc-log-msg (args)
   "Log message ARGS."
   (apply #'message (format "markdown-toc - %s" (car args)) (cdr args)))
@@ -152,33 +214,6 @@ it to the TOC structure."
                         (markdown-toc--to-link title count))))
        (s-join "\n")))
 
-(defcustom markdown-toc-list-item-marker
-  "-"
-  "List item marker that should be used.
-Example: '-' for unordered lists or '1.' for ordered lists."
-  :type '(choice
-          (string :tag "Unordered list header" "-")
-          (string :tag "Ordered list header" "1."))
-  :group 'markdown-toc)
-
-(defcustom markdown-toc-header-toc-start
-  "<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->"
-  "Beginning delimiter comment."
-  :group 'markdown-toc
-  :type 'string)
-
-(defcustom markdown-toc-header-toc-title
-  "**Table of Contents**"
-  "Title comment on TOC header."
-  :group 'markdown-toc
-  :type 'string)
-
-(defcustom markdown-toc-header-toc-end
-  "<!-- markdown-toc end -->"
-  "Ending delimiter comment."
-  :group 'markdown-toc
-  :type 'string)
-
 (defun markdown-toc--toc-already-present-p ()
   "Determine if a TOC has already been generated.
 Return the end position if it exists, nil otherwise."
@@ -219,41 +254,6 @@ Return the end position if it exists, nil otherwise."
           markdown-toc-header-toc-title
           toc
           markdown-toc-header-toc-end))
-
-(defcustom markdown-toc-indentation-space 4
-  "Let the user decide the indentation level."
-  :group 'markdown-toc
-  :type 'integer)
-
-(defcustom markdown-toc-user-toc-structure-manipulation-fn
-  (lambda (toc-structure) toc-structure)
-  "User crafted function to manipulate toc-structure as user sees fit.
-
-The toc-structure has the following form:
-'((0 . \"some markdown page title\")
-  (0 . \"main title\")
-  (1 . \"Sources\")
-  (2 . \"Marmalade (recommended)\")
-  (2 . \"Melpa-stable\")
-  (2 . \"Melpa (~snapshot)\")
-  (1 . \"Install\")
-  (2 . \"Load org-trello\")
-  (2 . \"Alternative\")
-  (3 . \"Git\")
-  (3 . \"Tar\")
-  (0 . \"another title\")
-  (1 . \"with\")
-  (1 . \"some\")
-  (1 . \"heading\"))
-
-If the user wanted to remove the first element, it could for
-example define the following function:
-  (custom-set-variables
-    '(markdown-toc-user-toc-structure-manipulation-fn 'cdr))
-
-Default to identity function (do nothing)."
-  :group 'markdown-toc
-  :type 'function)
 
 ;;;###autoload
 (defun markdown-toc-generate-toc (&optional replace-toc-p)
