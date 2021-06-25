@@ -60,6 +60,7 @@
 
 (require 's)
 (require 'dash)
+(require 'find-func)
 (require 'markdown-mode)
 
 (defconst markdown-toc--toc-version "0.1.5" "Current version installed.")
