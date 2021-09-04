@@ -18,22 +18,25 @@ build:
 	${CASK} build
 
 clean-cask:
-	rm -rf .cask/
+	[ -d .cask ] && rm -rf .cask/ || echo
 
-clean-dist: clean-cask
-	rm -rf dist/
+clean-dist:
+	[ -d dist ] && rm -rf dist/ || echo
 
-clean: clean-dist
-	rm -rf *.tar
+clean: clean-dist clean-cask
+	rm -rf ${ARCHIVE}
 	${CASK} clean-elc
 
+bootstrap:
+	${CASK}
+
 install:
-	${CASK} install
+	[ ! -d .cask ] && ${CASK} install || echo
 
 test-init:
 	${CASK} exec ert-runner init
 
-test: clean
+test: install
 	${CASK} exec ert-runner
 
 pkg-file:

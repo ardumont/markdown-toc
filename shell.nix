@@ -8,7 +8,7 @@ let markdown-toc-emacs = pkgs.emacsWithPackages (epkgs:
       ])
     );
 in pkgs.stdenv.mkDerivation {
-  name = "markdown-toc-env";
+  name = "markdown-toc";
   buildInputs = with pkgs; [
     markdown-toc-emacs
     pkgs.gitAndTools.hub

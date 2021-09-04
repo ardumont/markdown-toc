@@ -2,7 +2,6 @@
 (require 'el-mock)
 (require 'markdown-toc)
 (require 'mocker)
-(require 'cl)
 
 (ert-deftest test-markdown-toc-version ()
   (let ((markdown-toc--toc-version "0.1.2"))
