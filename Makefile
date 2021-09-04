@@ -17,7 +17,10 @@ pr:
 build:
 	${CASK} build
 
-clean-dist:
+clean-cask:
+	rm -rf .cask/
+
+clean-dist: clean-cask
 	rm -rf dist/
 
 clean: clean-dist
