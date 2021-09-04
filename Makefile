@@ -8,6 +8,9 @@ LANG=en_US.UTF-8
 
 .PHONY: clean
 
+activate:
+	nix develop
+
 pr:
 	hub pull-request -b ardumont:master
 

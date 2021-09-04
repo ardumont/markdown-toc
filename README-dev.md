@@ -1,8 +1,10 @@
 # Enter shell
 
 ```
-$ nix-shell
+$ make activate
 ```
+
+*Note*: This requires nix with the flake option activated.
 
 # Hack
 

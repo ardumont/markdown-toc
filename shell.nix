@@ -1,12 +1,18 @@
-with import <nixpkgs> {};
+{ pkgs, ... }:
 
-let sources = import ./nix/sources.nix;
-    pkgs = import sources.nixpkgs {};
-in stdenv.mkDerivation {
+let markdown-toc-emacs = pkgs.emacsWithPackages (epkgs:
+      (with epkgs.melpaStablePackages; [
+        markdown-mode s dash
+      ]) ++ (with pkgs; [
+        emacs markdown-toc
+      ])
+    );
+in pkgs.stdenv.mkDerivation {
   name = "markdown-toc-env";
-  buildInputs = [
-    pkgs.cask
+  buildInputs = with pkgs; [
+    markdown-toc-emacs
     pkgs.gitAndTools.hub
+    cask
   ];
   src = null;
 }
