@@ -60,7 +60,6 @@
 
 (require 's)
 (require 'dash)
-(require 'find-func)
 (require 'markdown-mode)
 
 (defconst markdown-toc--toc-version "0.1.5" "Current version installed.")
@@ -333,6 +332,7 @@ or if not on a toc link, this does nothing.
 
 (defun markdown-toc--bug-report ()
   "Compute the bug report for the user to include."
+  (require 'find-func)
   (->> `("Please:"
          "- Describe your problem with clarity and conciceness (cf. https://www.gnu.org/software/emacs/manual/html_node/emacs/Understanding-Bug-Reporting.html)"
          "- Explicit your installation choice (melpa, marmalade, el-get, tarball, git clone...)."
