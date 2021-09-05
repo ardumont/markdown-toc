@@ -2,9 +2,7 @@
 
 let markdown-toc-emacs = pkgs.emacsWithPackages (epkgs:
       (with epkgs.melpaStablePackages; [
-        markdown-mode s dash
-      ]) ++ (with pkgs; [
-        emacs markdown-toc
+        markdown-mode s dash pkgs.markdown-toc
       ])
     );
 in pkgs.stdenv.mkDerivation {
