@@ -27,14 +27,8 @@ clean: clean-dist clean-cask
 	rm -rf ${ARCHIVE}
 	${CASK} clean-elc
 
-bootstrap:
-	${CASK}
-
 install:
 	[ ! -d .cask ] && ${CASK} install || echo
-
-test-init:
-	${CASK} exec ert-runner init
 
 test: install
 	${CASK} exec ert-runner
