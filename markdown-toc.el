@@ -95,7 +95,7 @@ Example: '-' for unordered lists or '1.' for ordered lists."
   :group 'markdown-toc
   :type 'string)
 
-(defcustom markdown-toc-indentation-space 4
+(defcustom markdown-toc-indentation-space 2
   "Let the user decide the indentation level."
   :group 'markdown-toc
   :type 'integer)
