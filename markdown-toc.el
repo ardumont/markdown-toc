@@ -253,9 +253,9 @@ Return the end position if it exists, nil otherwise."
              (concat s markdown-toc-header-toc-start "\n")
            s)
          (if markdown-toc-header-toc-title
-             (concat s markdown-toc-header-toc-title "\n")
+             (concat s markdown-toc-header-toc-title "\n\n")
            s)
-         (concat s toc "\n")
+         (concat s toc "\n\n")
          (if markdown-toc-header-toc-end
              (concat s markdown-toc-header-toc-end "\n")
            s)))
