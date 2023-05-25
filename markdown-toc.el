@@ -155,7 +155,12 @@ Default to identity function (do nothing)."
 
 (defun markdown-toc--compute-toc-structure (imenu-index)
   "Given a IMENU-INDEX, compute the TOC structure."
-  (--mapcat (markdown-toc--compute-toc-structure-from-level 0 it) imenu-index))
+  (--mapcat (markdown-toc--compute-toc-structure-from-level
+             (if (eq markdown-toc-user-toc-structure-manipulation-fn 'cdr)
+                 -1
+               0)
+             it)
+            imenu-index))
 
 (defun markdown-toc--symbol (sym n)
   "Compute the repetition of a symbol SYM N times as a string."
