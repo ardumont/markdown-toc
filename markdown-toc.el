@@ -147,7 +147,7 @@ Default to identity function (do nothing)."
   (when menu-index
     (let* ((fst   (car menu-index))
            (tail  (cdr menu-index))
-           (ttail (if (integerp tail) nil (cdr tail))))
+           (ttail (cdr-safe tail)))
       (cons `(,level . ,fst)
             (--mapcat
              (markdown-toc--compute-toc-structure-from-level (+ 1 level) it)
