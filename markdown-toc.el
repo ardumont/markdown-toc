@@ -9,7 +9,7 @@
 ;; Created: 24th May 2014
 ;; Version: 0.1.5
 ;; Keywords: markdown, toc, tools,
-;; Package-Requires: ((markdown-mode "2.1") (dash "2.11.0") (s "1.9.0"))
+;; Package-Requires: ((emacs "27.1") (markdown-mode "2.1") (dash "2.11.0") (s "1.9.0"))
 
 ;; This file is NOT part of GNU Emacs.
 
