@@ -1,6 +1,5 @@
 # markdown-toc
 
-[![Build Status](https://travis-ci.com/ardumont/markdown-toc.png?branch=master)](https://travis-ci.com/ardumont/markdown-toc)
 [![CI](https://github.com/ardumont/markdown-toc/actions/workflows/test.yml/badge.svg)](https://github.com/ardumont/markdown-toc/actions/workflows/test.yml)
 [![Coverage Status](https://coveralls.io/repos/ardumont/markdown-toc/badge.svg?branch=master&service=github)](https://coveralls.io/github/ardumont/markdown-toc?branch=master)
 [![MELPA Stable](http://stable.melpa.org/packages/markdown-toc-badge.svg)](http://stable.melpa.org/#/markdown-toc)
