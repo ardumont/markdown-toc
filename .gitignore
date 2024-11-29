@@ -1,4 +1,7 @@
 /.cask/
+/.eask/
+/dist
 /test.md
 /result
+
 *.elc

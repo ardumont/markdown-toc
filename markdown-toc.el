@@ -1,13 +1,15 @@
 ;;; markdown-toc.el --- A simple TOC generator for markdown file  -*- lexical-binding: t; -*-
+
 ;; Copyright (C) 2014-2020 Antoine R. Dumont (@ardumont)
 
 ;; Author: Antoine R. Dumont (@ardumont)
 ;; Maintainer: Antoine R. Dumont (@ardumont)
+;;             Jen-Chieh Shen <jcs090218@gmail.com>
 ;; URL: http://github.com/ardumont/markdown-toc
 ;; Created: 24th May 2014
 ;; Version: 0.1.5
 ;; Keywords: markdown, toc, tools,
-;; Package-Requires: ((emacs "24.1") (markdown-mode "2.1") (dash "2.11.0") (s "1.9.0"))
+;; Package-Requires: ((emacs "27.1") (markdown-mode "2.1") (dash "2.11.0") (s "1.9.0"))
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -181,7 +183,7 @@ ensure uniqueness."
                  downcase
                  (s-replace "-" markdown-toc--dash-protection-symbol)
                  (s-replace "_" markdown-toc--underscore-protection-symbol)
-                 (replace-regexp-in-string "[[:punct:]]" "")
+                 (replace-regexp-in-string "[[:punct:][:nonascii:]]" "")
                  (s-replace markdown-toc--dash-protection-symbol "-")
                  (s-replace markdown-toc--underscore-protection-symbol "_")
                  (s-replace " " "-"))
