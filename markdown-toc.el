@@ -1,8 +1,10 @@
 ;;; markdown-toc.el --- A simple TOC generator for markdown file
+
 ;; Copyright (C) 2014-2020 Antoine R. Dumont (@ardumont)
 
 ;; Author: Antoine R. Dumont (@ardumont)
 ;; Maintainer: Antoine R. Dumont (@ardumont)
+;;             Jen-Chieh Shen <jcs090218@gmail.com>
 ;; URL: http://github.com/ardumont/markdown-toc
 ;; Created: 24th May 2014
 ;; Version: 0.1.5
