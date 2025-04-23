@@ -1,3 +1,5 @@
+;; -*- mode: eask; lexical-binding: t -*-
+
 (package "markdown-toc"
          "0.1.5"
          "A simple TOC generator for markdown file")
