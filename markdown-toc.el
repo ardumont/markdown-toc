@@ -272,15 +272,39 @@ the deleted TOC region, effectively replacing it."
   "Generate a TOC for markdown file at current point.
 Deletes any previous TOC."
   (interactive)
-  (save-excursion
-    (when (markdown-toc--toc-already-present-p)
-      ;; when toc already present, remove it
-      (markdown-toc--delete-toc t))
-    (->> (funcall imenu-create-index-function)
-         markdown-toc--compute-toc-structure
-         (funcall markdown-toc-user-toc-structure-manipulation-fn)
-         markdown-toc--generate-toc
-         insert)))
+  (let* ((window (selected-window))
+         (buffer-in-selected-window (eq (window-buffer window)
+                                        (current-buffer)))
+         (window-hscroll nil)
+         (lines-before nil))
+    (when buffer-in-selected-window
+      (setq window-hscroll (window-hscroll))
+      (setq lines-before (count-screen-lines
+                          (save-excursion (goto-char (window-start))
+                                          (vertical-motion 0)
+                                          (point))
+                          (save-excursion (vertical-motion 0)
+                                          (point))
+                          nil
+                          window)))
+    (unwind-protect
+        (save-excursion
+          (when (markdown-toc--toc-already-present-p)
+            ;; When toc already present, remove it
+            (markdown-toc--delete-toc t))
+          (->> (funcall imenu-create-index-function)
+               markdown-toc--compute-toc-structure
+               (funcall markdown-toc-user-toc-structure-manipulation-fn)
+               markdown-toc--generate-toc
+               insert))
+      (when buffer-in-selected-window
+        (set-window-start window
+                          (save-excursion
+                            (vertical-motion 0)
+                            (line-move-visual (* -1 lines-before))
+                            (vertical-motion 0)
+                            (point)))
+        (set-window-hscroll window window-hscroll)))))
 
 (defalias 'markdown-toc/generate-toc 'markdown-toc-generate-toc)
 
