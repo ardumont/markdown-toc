@@ -272,15 +272,53 @@ the deleted TOC region, effectively replacing it."
   "Generate a TOC for markdown file at current point.
 Deletes any previous TOC."
   (interactive)
-  (save-excursion
-    (when (markdown-toc--toc-already-present-p)
-      ;; when toc already present, remove it
-      (markdown-toc--delete-toc t))
-    (->> (funcall imenu-create-index-function)
-         markdown-toc--compute-toc-structure
-         (funcall markdown-toc-user-toc-structure-manipulation-fn)
-         markdown-toc--generate-toc
-         insert)))
+  (let* ((window (selected-window))
+         (buffer-in-selected-window (window-buffer window))
+         (restore-window-settings (eq buffer-in-selected-window
+                                      (current-buffer)))
+         (window-hscroll (window-hscroll))
+         (point-marker nil)
+         (lines-before-cursor nil))
+    (when restore-window-settings
+      (with-current-buffer buffer-in-selected-window
+        (setq point-marker (point-marker))
+        (setq window-hscroll (window-hscroll))
+        (setq lines-before-cursor (count-screen-lines
+                                   (save-excursion
+                                     (goto-char (window-start))
+                                     (beginning-of-visual-line)
+                                     (point))
+                                   (save-excursion
+                                     (beginning-of-visual-line)
+                                     (point))
+                                   nil
+                                   window))))
+    (unwind-protect
+        (save-excursion
+          (when (markdown-toc--toc-already-present-p)
+            ;; When toc already present, remove it
+            (markdown-toc--delete-toc t))
+          (->> (funcall imenu-create-index-function)
+               markdown-toc--compute-toc-structure
+               (funcall markdown-toc-user-toc-structure-manipulation-fn)
+               markdown-toc--generate-toc
+               insert))
+      (when restore-window-settings
+        (goto-char point-marker)
+        (set-window-start window
+                          ;; Dotimes and (line-move-visual -1) is more accurate
+                          ;; than (line-move-visual N).
+                          (save-excursion
+                            (dotimes (_ lines-before-cursor)
+                              (condition-case nil
+                                  (let ((line-move-visual t)
+                                        (line-move-ignore-invisible t))
+                                    (line-move -1))
+                                (error nil)))
+
+                            (beginning-of-visual-line)
+                            (point)))
+        (set-window-hscroll window window-hscroll)))))
 
 (defalias 'markdown-toc/generate-toc 'markdown-toc-generate-toc)
 
