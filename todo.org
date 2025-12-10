@@ -1,11 +1,15 @@
 #+title: backlog/release-notes
 #+author: ardumont
 
+* DONE 0.1.6 [100%]
+  CLOSED: [2025-12-11 Fri 04:17]
+
 * DONE 0.1.5 [100%]
   CLOSED: [2020-05-17 Sun 14:32]
 - [X] Provide a markdown-toc minor mode
 - [X] Follow link in toc: M-x markdown-toc-follow-toc-link-at-point
 - [X] Allow user space indentation customization
+
 * DONE 0.1.4 [100%]
   CLOSED: [2020-05-02 Sat 09:30]
 
@@ -30,6 +34,7 @@ CLOSED: [2016-07-20 Wed 11:40]
 - [X] Update version
 - [X] Fix the problem when generating TOC for document with UTF-8 characters - Closes #24
 - [X] Release notes
+
 * DONE 0.1.0 [100%]
 CLOSED: [2016-02-27 Sat 11:16]
 - [X] Update dependencies (markdown-mode)
@@ -46,6 +51,7 @@ CLOSED: [2015-12-23 Wed 11:59]
 - [X] Update version
 - [X] Clean up tests
 - [X] Release notes
+
 * DONE 0.0.8 [100%]
 CLOSED: [2015-07-15 Wed 17:12]
 - [X] Add test coverage
@@ -54,6 +60,7 @@ CLOSED: [2015-07-15 Wed 17:12]
 - [X] Update version
 - [X] Update version dependencies
 - [X] Release notes
+
 * DONE 0.0.7 [100%]
 CLOSED: [2014-12-15 Mon 23:31]
 - [X] Add prefix argument to `markdown-toc/generate-toc' to replace existing TOC at the same location #10
@@ -64,6 +71,7 @@ CLOSED: [2014-12-15 Mon 23:31]
 - [X] Update README.md
 - [X] Update version
 - [X] Release notes
+
 * DONE 0.0.6 [100%]
 CLOSED: [2014-06-30 Mon 13:10]
 - [X] Fix typo on the markdown header information
