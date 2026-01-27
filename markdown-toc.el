@@ -133,6 +133,13 @@ Default to identity function (do nothing)."
   :group 'markdown-toc
   :type 'function)
 
+(defcustom markdown-toc-use-pandoc-style nil
+  "When not-nil, use pandoc's default identifier generation algorithm,
+compatible with pandoc html export and with Unicode support;
+When nil, use the legacy algorithm."
+  :group 'markdown-toc
+  :type 'boolean)
+
 (defun markdown-toc-log-msg (args)
   "Log message ARGS."
   (apply #'message (format "markdown-toc - %s" (car args)) (cdr args)))
@@ -206,7 +213,7 @@ TOC-STRUCTURE is a list of cons cells, where each cons cell contains:
                     (list indent title (- count 1))))
                 toc-structure))
 
-(defun markdown-toc--to-markdown-toc (level-title-toc-list)
+(defun markdown-toc--to-markdown-toc-legacy (level-title-toc-list)
   "Given LEVEL-TITLE-TOC-LIST, a list of pair level, title, return a TOC string."
   (->> level-title-toc-list
        markdown-toc--count-duplicate-titles
@@ -218,6 +225,66 @@ TOC-STRUCTURE is a list of cons cells, where each cons cell contains:
                         markdown-toc-list-item-marker
                         (markdown-toc--to-link title count))))
        (s-join "\n")))
+
+(defun markdown-toc--to-slug (title)
+  "Generate slug from TITLE. Replica of pandoc textToIdentifier."
+  (let* ((case-fold-search nil)
+         (slug
+          (--> title
+               (downcase it)
+               (replace-regexp-in-string "[^[:alnum:][:space:]_.-]" "" it)
+               (split-string it "[[:space:]]+" t)
+               (mapconcat #'identity it "-")
+               (replace-regexp-in-string "\\`[^[:alpha:]]+" "" it))))
+    (if (string-empty-p slug) "section" slug)))
+
+(defun markdown-toc--get-unique-slug (base-slug used-slugs)
+  "Find unique variant of BASE-SLUG avoiding USED-SLUGS,
+where USED-SLUGS is a hash table. Replica of pandoc uniqueIdent."
+  (cond
+   ((not (gethash base-slug used-slugs))
+    base-slug)
+   ((cl-loop for n from 1 to 60000
+             for candidate = (format "%s-%d" base-slug n)
+             unless (gethash candidate used-slugs)
+             return candidate))
+   (t base-slug)))
+
+(defun markdown-toc--generate-unique-slugs (toc-structure)
+  "Process TOC-STRUCTURE, generating unique slugs.
+Input: ((level . title) ... ); Output: ((level title slug) ... )"
+  (let ((used-slugs (make-hash-table :test 'equal))
+        (result nil))
+    (dolist (item toc-structure)
+      (let* ((level (car item))
+             (title (cdr item))
+             (base-slug (markdown-toc--to-slug title))
+             (unique-slug (markdown-toc--get-unique-slug
+                           base-slug used-slugs)))
+        (puthash unique-slug t used-slugs)
+        (push (list level title unique-slug) result)))
+    (nreverse result)))
+
+(defun markdown-toc--to-markdown-toc-pandoc (level-title-toc-list)
+  "Given LEVEL-TITLE-TOC-LIST, a list of pair level, title,
+return a TOC string."
+  (->> level-title-toc-list
+       markdown-toc--generate-unique-slugs
+       (--map (let ((nb-spaces (* markdown-toc-indentation-space (car it)))
+                    (title     (cadr it))
+                    (slug      (caddr it)))
+                (format "%s%s [%s](#%s)"
+                        (markdown-toc--symbol " " nb-spaces)
+                        markdown-toc-list-item-marker
+                        (string-trim title)
+                        slug)))
+       (s-join "\n")))
+
+(defun markdown-toc--to-markdown-toc (level-title-toc-list)
+  "Dispatcher for generating TOC string."
+  (if markdown-toc-use-pandoc-style
+      (markdown-toc--to-markdown-toc-pandoc level-title-toc-list)
+    (markdown-toc--to-markdown-toc-legacy level-title-toc-list)))
 
 (defun markdown-toc--toc-already-present-p ()
   "Determine if a TOC has already been generated.
