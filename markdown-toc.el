@@ -133,7 +133,7 @@ Default to identity function (do nothing)."
   :group 'markdown-toc
   :type 'function)
 
-(defcustom markdown-toc-use-pandoc-style nil
+(defcustom markdown-toc-id-use-pandoc-default nil
   "When not-nil, use pandoc's default identifier generation algorithm,
 compatible with pandoc html export and with Unicode support;
 When nil, use the legacy algorithm."
