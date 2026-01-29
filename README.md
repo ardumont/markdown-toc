@@ -135,7 +135,8 @@ Currently, you can customize the following:
 * `markdown-toc-header-toc-start`
 * `markdown-toc-header-toc-title`
 * `markdown-toc-header-toc-end`
-*  markdown-toc-indentation-space
+* `markdown-toc-indentation-space`
+* `markdown-toc-preset` (Default: `'legacy`)
 
 Customize them as following format:
 
@@ -144,7 +145,8 @@ Customize them as following format:
  '(markdown-toc-header-toc-start "<!-- customized start-->")
  '(markdown-toc-header-toc-title "**customized title**")
  '(markdown-toc-header-toc-end "<!-- customized end -->")
- '(markdown-toc-indentation-space 4))
+ '(markdown-toc-indentation-space 4)
+ '(markdown-toc-preset legacy))
 ```
 
 ## Minor mode
