@@ -134,9 +134,12 @@ Default to identity function (do nothing)."
   :type 'function)
 
 (defcustom markdown-toc-preset 'legacy
-  "When not-nil, use pandoc's default identifier generation algorithm,
-compatible with pandoc html export and with Unicode support;
-When nil, use the legacy algorithm."
+  "The algorithm preset for the markdown toc generator.
+
+The default uses the `legacy' algorithm originated from this package.
+
+Set to the symbol `pandoc' to compatible with pandoc html export and
+with Unicode support."
   :group 'markdown-toc
   :type '(choice (const :tag "Legacy" legacy)
                  (const :tag "Pandoc" pandoc)))
