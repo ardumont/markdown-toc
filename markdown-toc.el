@@ -133,12 +133,13 @@ Default to identity function (do nothing)."
   :group 'markdown-toc
   :type 'function)
 
-(defcustom markdown-toc-id-use-pandoc-default nil
+(defcustom markdown-toc-preset 'legacy
   "When not-nil, use pandoc's default identifier generation algorithm,
 compatible with pandoc html export and with Unicode support;
 When nil, use the legacy algorithm."
   :group 'markdown-toc
-  :type 'boolean)
+  :type '(choice (const :tag "Legacy" legacy)
+                 (const :tag "Pandoc" pandoc)))
 
 (defun markdown-toc-log-msg (args)
   "Log message ARGS."
@@ -282,9 +283,10 @@ return a TOC string."
 
 (defun markdown-toc--to-markdown-toc (level-title-toc-list)
   "Dispatcher for generating TOC string."
-  (if markdown-toc-id-use-pandoc-default
-      (markdown-toc--to-markdown-toc-pandoc level-title-toc-list)
-    (markdown-toc--to-markdown-toc-legacy level-title-toc-list)))
+  (funcall (pcase markdown-toc-preset
+             (`pandoc #'markdown-toc--to-markdown-toc-pandoc)
+             (_       #'markdown-toc--to-markdown-toc-legacy))
+           level-title-toc-list))
 
 (defun markdown-toc--toc-already-present-p ()
   "Determine if a TOC has already been generated.
