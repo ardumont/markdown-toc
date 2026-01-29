@@ -282,7 +282,7 @@ return a TOC string."
 
 (defun markdown-toc--to-markdown-toc (level-title-toc-list)
   "Dispatcher for generating TOC string."
-  (if markdown-toc-use-pandoc-style
+  (if markdown-toc-id-use-pandoc-default
       (markdown-toc--to-markdown-toc-pandoc level-title-toc-list)
     (markdown-toc--to-markdown-toc-legacy level-title-toc-list)))
 
