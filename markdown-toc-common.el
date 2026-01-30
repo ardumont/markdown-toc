@@ -1,7 +1,5 @@
 ;;; markdown-toc-common.el --- Common assets -*- lexical-binding: t; -*-
 
-;; Package-Requires: ((emacs "28.1") (dash "2.11.0") (s "1.9.0"))
-
 ;;; Code:
 
 (require 's)
