@@ -65,7 +65,9 @@
 (require 'markdown-mode)
 (require 'find-func) ; find-library-name
 
-(defconst markdown-toc--toc-version "0.1.5" "Current version installed.")
+(require 'markdown-toc-pandoc)
+
+(defconst markdown-toc--toc-version "0.1.6" "Current version installed.")
 
 (defgroup markdown-toc nil
   "A simple TOC generator for markdown file."
@@ -132,6 +134,18 @@ example define the following function:
 Default to identity function (do nothing)."
   :group 'markdown-toc
   :type 'function)
+
+(defcustom markdown-toc-preset 'legacy
+  "The algorithm preset for the markdown toc generator.
+
+The default uses the `legacy' algorithm originated from this package.
+
+Set to the symbol `pandoc' to compatible with pandoc html export and
+with Unicode support."
+  :group 'markdown-toc
+  :type '(choice (const :tag "Legacy" legacy)
+                 (const :tag "Pandoc" pandoc)
+                 (const :tag "Pandoc CLI" pandoc-cli)))
 
 (defun markdown-toc-log-msg (args)
   "Log message ARGS."
@@ -206,7 +220,7 @@ TOC-STRUCTURE is a list of cons cells, where each cons cell contains:
                     (list indent title (- count 1))))
                 toc-structure))
 
-(defun markdown-toc--to-markdown-toc (level-title-toc-list)
+(defun markdown-toc--to-markdown-toc-legacy (level-title-toc-list)
   "Given LEVEL-TITLE-TOC-LIST, a list of pair level, title, return a TOC string."
   (->> level-title-toc-list
        markdown-toc--count-duplicate-titles
@@ -219,13 +233,20 @@ TOC-STRUCTURE is a list of cons cells, where each cons cell contains:
                         (markdown-toc--to-link title count))))
        (s-join "\n")))
 
+(defun markdown-toc--to-markdown-toc (level-title-toc-list)
+  "Dispatcher for generating TOC string."
+  (funcall (pcase markdown-toc-preset
+             (`pandoc     #'markdown-toc--to-markdown-toc-pandoc)
+             (`pandoc-cli #'markdown-toc--to-markdown-toc-pandoc-cli)
+             (_           #'markdown-toc--to-markdown-toc-legacy))
+           level-title-toc-list))
+
 (defun markdown-toc--toc-already-present-p ()
   "Determine if a TOC has already been generated.
 Return the end position if it exists, nil otherwise."
   (save-excursion
     (goto-char (point-min))
     (re-search-forward markdown-toc-header-toc-start nil t)))
-
 
 (defun markdown-toc--toc-start ()
   "Compute the toc's starting point."

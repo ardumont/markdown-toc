@@ -1,13 +1,15 @@
 ;; -*- mode: eask; lexical-binding: t -*-
 
 (package "markdown-toc"
-         "0.1.5"
+         "0.1.6"
          "A simple TOC generator for markdown file")
 
 (website-url "http://github.com/ardumont/markdown-toc")
 (keywords "markdown" "toc" "tools")
 
 (package-file "markdown-toc.el")
+
+(files "markdown-toc-*.el")
 
 (script "test" "echo \"Error: no test specified\" && exit 1")
 
