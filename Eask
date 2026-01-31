@@ -9,8 +9,7 @@
 
 (package-file "markdown-toc.el")
 
-(files "markdown-toc-common.el"
-       "markdown-toc-pandoc.el")
+(files "markdown-toc-*.el")
 
 (script "test" "echo \"Error: no test specified\" && exit 1")
 

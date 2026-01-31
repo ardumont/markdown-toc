@@ -5,7 +5,15 @@
 (require 's)
 (require 'dash)
 
-(require 'markdown-toc-common)
+;;
+;;; Externals
+
+(defvar markdown-toc-indentation-space)
+(defvar markdown-toc-list-item-marker)
+(declare-function markdown-toc--symbol nil "markdown-toc.el")
+
+;;
+;;; Pandoc Impls
 
 (defun markdown-toc--protected-data-push (text prefix index protected-data)
   "Tag TEXT by PREFIX and INDEX and push into PROTECTED-DATA.
