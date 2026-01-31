@@ -144,7 +144,8 @@ Set to the symbol `pandoc' to compatible with pandoc html export and
 with Unicode support."
   :group 'markdown-toc
   :type '(choice (const :tag "Legacy" legacy)
-                 (const :tag "Pandoc" pandoc)))
+                 (const :tag "Pandoc" pandoc)
+                 (const :tag "Pandoc CLI" pandoc-cli)))
 
 (defun markdown-toc-log-msg (args)
   "Log message ARGS."
@@ -235,8 +236,9 @@ TOC-STRUCTURE is a list of cons cells, where each cons cell contains:
 (defun markdown-toc--to-markdown-toc (level-title-toc-list)
   "Dispatcher for generating TOC string."
   (funcall (pcase markdown-toc-preset
-             (`pandoc #'markdown-toc--to-markdown-toc-pandoc)
-             (_       #'markdown-toc--to-markdown-toc-legacy))
+             (`pandoc     #'markdown-toc--to-markdown-toc-pandoc)
+             (`pandoc-cli #'markdown-toc--to-markdown-toc-pandoc-cli)
+             (_           #'markdown-toc--to-markdown-toc-legacy))
            level-title-toc-list))
 
 (defun markdown-toc--toc-already-present-p ()

@@ -227,5 +227,70 @@ This correctly handles most cases but not perfectly aligned with pandoc."
                         slug)))
        (s-join "\n")))
 
+(defun markdown-toc--generate-slugs-via-pandoc (level-title-toc-list)
+  "Generate slugs using Pandoc CLI with temp buffer based processing.
+Feed all titles to Pandoc at once, HTML comments as separators.
+LEVEL-TITLE-TOC-LIST is a list of (LEVEL . TITLE) pairs.
+Returns a list of slugs in the same order as input."
+  (let ((separator "<!-- MARKDOWN-TOC-SEPARATOR-f9e17b09fd843467e69837db926e6f8320a6ea488c678a4a834b40331e22cc2b -->"))
+    (with-temp-buffer
+      ;; Build markdown
+      (dolist (item level-title-toc-list)
+        (insert (make-string (1+ (car item)) ?#) " " (cdr item) "\n\n")
+        (insert separator "\n\n"))
+
+      ;; Call pandoc
+      (let ((exit-code (call-process-region
+                        (point-min) (point-max)
+                        "pandoc" t t nil
+                        "-f" "markdown"
+                        "-t" "html")))
+        (unless (zerop exit-code)
+          (error "Pandoc failed with exit code %d. Output:%s"
+                 exit-code (buffer-string))))
+
+      ;; Extract slugs by scanning buffer
+      (let ((slugs nil)
+            (header-regex (rx "<h" (any "1-6")
+                              (one-or-more (not ">"))
+                              "id=\""
+                              (group (one-or-more (not "\"")))
+                              "\"")))
+        (goto-char (point-min))
+
+        (dolist (_ level-title-toc-list)
+          (let* ((point-begin (point))
+                 (point-end (if (search-forward separator nil t)
+                                (point)
+                              (point-max))))
+            (goto-char point-begin)
+            (if (re-search-forward header-regex point-end t)
+                (push (match-string 1) slugs)
+              (push nil slugs))
+            (goto-char point-end)))
+
+        (nreverse slugs)))))
+
+(defun markdown-toc--to-markdown-toc-pandoc-cli (level-title-toc-list)
+  "Generate TOC using pandoc CLI for accurate slug generation.
+LEVEL-TITLE-TOC-LIST is a list of (LEVEL . TITLE) pairs.
+Returns a formatted TOC string compatible with pandoc-generated anchors."
+  (unless (executable-find "pandoc")
+    (user-error "Pandoc executable not found."))
+  (let ((slugs (markdown-toc--generate-slugs-via-pandoc
+                level-title-toc-list))
+        (result nil))
+    (dolist (item level-title-toc-list)
+      (let* ((nb-spaces (* markdown-toc-indentation-space (car item)))
+             (title     (cdr item))
+             (slug      (pop slugs)))
+        (push (format "%s%s [%s](#%s)"
+                      (markdown-toc--symbol " " nb-spaces)
+                      markdown-toc-list-item-marker
+                      (string-trim title)
+                      (or slug ""))
+              result)))
+    (mapconcat #'identity (nreverse result) "\n")))
+
 (provide 'markdown-toc-pandoc)
 ;;; markdown-toc-pandoc.el ends here
