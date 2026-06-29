@@ -293,15 +293,48 @@ the deleted TOC region, effectively replacing it."
   "Generate a TOC for markdown file at current point.
 Deletes any previous TOC."
   (interactive)
-  (save-excursion
-    (when (markdown-toc--toc-already-present-p)
-      ;; when toc already present, remove it
-      (markdown-toc--delete-toc t))
-    (->> (funcall imenu-create-index-function)
-         markdown-toc--compute-toc-structure
-         (funcall markdown-toc-user-toc-structure-manipulation-fn)
-         markdown-toc--generate-toc
-         insert)))
+  (let* ((window (selected-window))
+         (window-buffer (window-buffer window))
+         (lines-before-cursor (when (and (window-live-p window)
+                                         (eq (current-buffer) window-buffer))
+                                (count-screen-lines
+                                 (save-excursion
+                                   (goto-char (window-start window))
+                                   (beginning-of-visual-line)
+                                   (point))
+                                 (save-excursion
+                                   (beginning-of-visual-line)
+                                   (point))
+                                 nil
+                                 window))))
+    (unwind-protect
+        (save-excursion
+          (when (markdown-toc--toc-already-present-p)
+            ;; When toc already present, remove it
+            (markdown-toc--delete-toc t))
+          (->> (funcall imenu-create-index-function)
+               markdown-toc--compute-toc-structure
+               (funcall markdown-toc-user-toc-structure-manipulation-fn)
+               markdown-toc--generate-toc
+               insert))
+      ;; Generating a table of contents modifies the buffer content while it is
+      ;; visible in a window. When Markdown content is added or removed above
+      ;; the current cursor position, Emacs often realigns the display to keep
+      ;; the point visible, which frequently causes the window-start to jump.
+      ;; The following restores the scroll position by preserving the
+      ;; window-start relative to the cursor.
+      (when (and lines-before-cursor
+                 (window-live-p window)
+                 (buffer-live-p window-buffer)
+                 (eq window-buffer (window-buffer window)))
+        (with-selected-window window
+          (let ((start-pos (save-excursion
+                             (beginning-of-visual-line)
+                             (vertical-motion (- lines-before-cursor)
+                                              window)
+                             (beginning-of-visual-line)
+                             (point))))
+            (set-window-start window start-pos t)))))))
 
 (defalias 'markdown-toc/generate-toc 'markdown-toc-generate-toc)
 
