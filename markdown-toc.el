@@ -282,11 +282,17 @@ the deleted TOC region, effectively replacing it."
 
 (defun markdown-toc--compute-full-toc (toc)
   "Given the TOC's content, compute the full toc with comments and title."
-  (format "%s\n%s\n\n%s\n\n%s\n"
-          markdown-toc-header-toc-start
-          markdown-toc-header-toc-title
-          toc
-          markdown-toc-header-toc-end))
+  (-as-> "" s
+         (if markdown-toc-header-toc-start
+             (concat s markdown-toc-header-toc-start "\n")
+           s)
+         (if markdown-toc-header-toc-title
+             (concat s markdown-toc-header-toc-title "\n\n")
+           s)
+         (concat s toc "\n\n")
+         (if markdown-toc-header-toc-end
+             (concat s markdown-toc-header-toc-end "\n")
+           s)))
 
 ;;;###autoload
 (defun markdown-toc-generate-toc ()
